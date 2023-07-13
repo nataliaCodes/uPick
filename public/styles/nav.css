@@ -1,0 +1,31 @@
+nav {
+  font-size: 1.5em;
+  font-family: 'Questrial', sans-serif;
+  background-color: #EAE7DC;
+  color: #8E8D8A;
+}
+
+nav .navbar-brand {
+  font-size: larger;
+}
+
+nav .collapse button {
+  background-color: #E85A4F;
+}
+
+nav .collapse button:hover {
+  background-color: #E98074;
+  color: white;
+}
+
+nav #btn-logout {
+  background-color: transparent;
+  border: 2px solid #E98074;
+  border-radius: 4px;
+  font-size: smaller;
+}
+
+nav #btn-logout:hover {
+  background-color: #E98074;
+  color: white;
+}

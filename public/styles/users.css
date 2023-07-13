@@ -1,0 +1,64 @@
+.grey-background {
+  background-color: #EAE7DC;
+  font-family: 'Questrial', sans-serif;
+}
+
+.grey-background div.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #E85A4F;
+  border-radius: 4px;
+  width: 55%;
+  margin: 2em auto;
+}
+
+.grey-background div.profile-container div.card {
+  width: 50%;
+  margin-top: 3em;
+}
+
+.grey-background div.profile-container div.user-inputs {
+  margin: 5em 0;
+}
+
+.grey-background div.profile-container div.user-inputs div.form-group {
+  border-radius: 4px;
+  border: 2px solid #E98074;
+}
+
+.grey-background div.profile-container div.user-inputs div.form-group input {
+  background-color: transparent;
+}
+
+.grey-background div.profile-container div.buttons {
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.grey-background div.profile-container div.buttons .btn-submit {
+  background-color: #E98074;
+  color: white;
+  border: 2px solid #E98074;
+  border-radius: 4px;
+  padding: 0.5em;
+}
+
+.grey-background div.profile-container div.buttons .btn-submit:hover {
+  background-color: transparent;
+  color: black;
+}
+
+.grey-background div.profile-container div.buttons .btn-cancel {
+  background-color: transparent;
+  color: black;
+  border: 2px solid #E98074;
+  border-radius: 4px;
+}
+
+.grey-background div.profile-container div.buttons .btn-cancel:hover {
+  background-color: #E98074;
+  color: white;
+}

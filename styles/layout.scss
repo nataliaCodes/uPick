@@ -1,0 +1,171 @@
+// See: https://sass-lang.com/
+
+.grey-background {
+  background-color: #EAE7DC;
+
+
+  .main-background {
+  font-family: 'Questrial', sans-serif;
+  background-color: #EAE7DC;
+  color: #8E8D8A;
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+
+  .jumbotron {
+    background-color: transparent;
+    margin-top: 8em;
+    padding: 5em 10em;
+    border: 1px solid #E85A4F;
+    border-radius: 2px;
+    h1 {
+      color: #E85A4F;
+    }
+  }
+
+  h1 {
+    color: #244751;
+  }
+
+  .modal-notify .modal-header {
+    border-radius: 3px 3px 0 0;
+  }
+  .modal-notify .modal-content {
+    border-radius: 3px;
+  }
+
+  .smart-add {
+    margin-top: 15px;
+    background-color: transparent;
+    border: 2px solid #E98074;
+    border-radius: 4px;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+
+    .smart-add-box {
+      width: 14em;
+      display: flex;
+      flex-direction: column;
+      margin-top: 10px;
+      margin-bottom: 20px;
+
+      textarea {
+        height: 2em;
+        width: 14em;
+        border-style: hidden;
+        border-bottom: 2px solid #E85A4F;
+        background-color: transparent;
+        resize: none;
+      }
+
+      .new-item {
+        background-color: transparent;
+        color: black;
+        border: 2px solid #E98074;
+        border-radius: 4px;
+        width: 25%;
+      }
+
+      .new-item:hover {
+        background-color: #E98074;
+        color: white;
+      }
+    }
+
+  }
+
+  .main-categories {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+
+    h2 {
+      color: #E85A4F;
+    }
+
+    h3 {
+      color: #E85A4F;
+    }
+
+    div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 1em;
+      padding: 1em;
+      width: 100%;
+
+
+
+    }
+
+    article {
+      border: 2px solid #D8C3A5;
+      border-radius: 4px;
+      padding: 1em;
+      width: 100%;
+      margin: 1em 0;
+
+      h2 {
+        border-bottom: 1px solid black;
+      }
+
+      .items-count {
+        text-align: right;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .buttons {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+
+        button {
+          margin: 1em;
+          background-color: transparent;
+          color: black;
+          border: 2px solid #E98074;
+          border-radius: 4px;
+
+        }
+
+        .button:hover {
+          background-color: #E98074;
+          color: white;
+        }
+
+      }
+    }
+  }
+
+  .gray-out {
+    color: lightcoral;
+  }
+
+
+
+  }
+
+
+}
+
+
+
+
+
+
+

@@ -1,0 +1,57 @@
+.grey-background {
+  background-color: #EAE7DC;
+}
+
+.grey-background .login-background .main-login {
+  font-family: 'Questrial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #E85A4F;
+  border-radius: 2px;
+  margin: 5em auto;
+  color: #8E8D8A;
+  width: 30em;
+}
+
+.grey-background .login-background .main-login .login-title {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.grey-background .login-background .main-login .email-password-container {
+  margin-bottom: 15px;
+}
+
+.grey-background .login-background .main-login .email-password-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.grey-background .login-background .main-login .email-password-container form input {
+  background-color: transparent;
+  border-style: hidden;
+  border-bottom: 2px solid #E98074;
+}
+
+.grey-background .login-background .main-login .email-password-container form .login-submit {
+  margin-top: 15px;
+  background-color: transparent;
+  color: black;
+  border: 2px solid #E98074;
+  border-radius: 4px;
+  width: 50%;
+}
+
+.grey-background .login-background .main-login .email-password-container form .login-submit:hover {
+  background-color: #E98074;
+  color: white;
+}
+
+.grey-background .login-background .main-login h4 {
+  margin-bottom: 1em;
+}
+
+.grey-background .login-background .main-login h4 a {
+  color: #E85A4F;
+}
