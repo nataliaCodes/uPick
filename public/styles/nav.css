@@ -1,5 +1,6 @@
 .navbar-light {
   font-size: 1.5em;
+  color: #15616D !important;
 }
 
 .navbar-light .navbar-brand {
@@ -27,7 +28,7 @@
 
 .navbar-light #btn-logout {
   background-color: transparent;
-  border: 2px solid #15616D;
+  border: 2px solid #001524;
   border-radius: 4px;
   font-size: smaller;
 }

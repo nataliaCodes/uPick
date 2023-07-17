@@ -2,18 +2,19 @@
 
 .navbar-light {
   font-size: 1.5em;
+  color: $nav-color !important;
 
   .navbar-brand {
     font-size: xx-large;
-    color: $text-color !important;
+    color: $nav-color !important;
   }
 
   .navbar-nav .nav-link {
-    color: $text-color !important;
+    color: $nav-color !important;
   }
 
   .collapse button {
-    background-color: $text-color;
+    background-color: $nav-color;
     color: white;
 
     &:hover {

@@ -8,6 +8,7 @@ const createDoneButton = function(itemId) {
     $(`${itemId}`).addClass("gray-out");
   });
 }
+
 const createEditButton = function(modalHTMLId, itemName, itemId) {
   return $(`<button type="button" class="edit-button" data-toggle="modal" data-target="${modalHTMLId}">`)
   .text('Edit')
@@ -17,6 +18,15 @@ const createEditButton = function(modalHTMLId, itemName, itemId) {
       console.log(`Edit button clicked for ${modalHTMLId} ${itemId}`)
   });
 }
+
+const createDivider = function(itemId, itemsCount) {
+  if (itemsCount <= itemId + 1) {
+    return;
+  };
+
+  return $('<hr>');
+}
+
 const createCategoryDisplay = function(queryResult, category) {
   let itemsCount = 0;
   const categoryContainer = $(`${category}`);
@@ -48,6 +58,9 @@ const createCategoryDisplay = function(queryResult, category) {
         //edit button works its magic through a modal popup form
         const editButton = createEditButton("#moviesModal", object.title, id);
 
+        //divider line between category items - unless single or last item
+        const divider = createDivider(movieId, itemsCount);
+
         //put all HTML elements together
         header.append(title);
         buttonsContainer.append(doneButton);
@@ -56,6 +69,7 @@ const createCategoryDisplay = function(queryResult, category) {
         item.append(header);
         item.append(rating);
         item.append(synopsis);
+        item.append(divider);
         categoryContainer.append(item);
         movieId ++;
       }
@@ -77,6 +91,7 @@ const createCategoryDisplay = function(queryResult, category) {
         const address = $('<h6>').text(`${object.street}, ${object.city}, ${object.province}, ${object.post_code}, ${object.country}`);
         const doneButton = createDoneButton(myId);
         const editButton = createEditButton("#restaurantsModal", object.name, id);
+        const divider = createDivider(restaurantId, itemsCount);
         header.append(name);
         buttonsContainer.append(doneButton);
         buttonsContainer.append(editButton);
@@ -84,6 +99,7 @@ const createCategoryDisplay = function(queryResult, category) {
         item.append(header);
         item.append(rating);
         item.append(address);
+        item.append(divider);
         categoryContainer.append(item);
         restaurantId ++;
       }
@@ -105,6 +121,7 @@ const createCategoryDisplay = function(queryResult, category) {
         const synopsis = $('<h6>').text(`${object.synopsis}`);
         const doneButton = createDoneButton(myId);
         const editButton = createEditButton("#booksModal", object.title, id);
+        const divider = createDivider(bookId, itemsCount);
         header.append(title);
         buttonsContainer.append(doneButton);
         buttonsContainer.append(editButton);
@@ -112,6 +129,7 @@ const createCategoryDisplay = function(queryResult, category) {
         item.append(header);
         item.append(rating);
         item.append(synopsis);
+        item.append(divider);
         categoryContainer.append(item);
         bookId ++;
       }
@@ -133,6 +151,7 @@ const createCategoryDisplay = function(queryResult, category) {
         const price = $('<h6>').text(`Price: $${object.price /100}`);
         const doneButton = createDoneButton(myId);
         const editButton = createEditButton("#productsModal", object.name, id);
+        const divider = createDivider(productId, itemsCount);
         header.append(name);
         buttonsContainer.append(doneButton);
         buttonsContainer.append(editButton);
@@ -140,6 +159,7 @@ const createCategoryDisplay = function(queryResult, category) {
         item.append(header);
         item.append(rating);
         item.append(price);
+        item.append(divider);
         categoryContainer.append(item);
         productId ++;
       }

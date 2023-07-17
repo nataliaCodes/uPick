@@ -1,11 +1,11 @@
 body {
-  background-color: #FFF7EB !important;
-  color: #15616D !important;
+  background-color: #f7f4f4 !important;
+  color: #001524 !important;
   font-family: 'Questrial', sans-serif !important;
 }
 
 body a {
-  color: #15616D;
+  color: #001524;
 }
 
 .main-background {
@@ -18,7 +18,7 @@ body a {
   background-color: transparent;
   margin-top: 8em;
   padding: 5em 10em;
-  border: 1px solid #001524;
+  border: 1px solid #15616D;
   border-radius: 2px;
 }
 
@@ -37,20 +37,18 @@ body a {
 .main-background .smart-add {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
+  width: 90%;
   margin-top: 15px;
   background-color: transparent;
-  border: 2px solid #001524;
-  border-radius: 4px;
-  width: 50%;
   margin-top: 30px;
   margin-bottom: 20px;
 }
 
 .main-background .smart-add .smart-add-box {
+  display: flex;
   flex-direction: column;
   width: 14em;
-  display: flex;
   margin-top: 10px;
   margin-bottom: 20px;
 }
@@ -59,14 +57,19 @@ body a {
   height: 2em;
   width: 14em;
   border-style: hidden;
-  border-bottom: 2px solid #001524;
+  border-bottom: 2px solid #15616D;
   background-color: transparent;
   resize: none;
 }
 
+.main-background .smart-add .smart-add-box textarea:focus-visible {
+  border-style: hidden;
+  border-bottom: 2px solid #15616D;
+}
+
 .main-background .smart-add .smart-add-box .new-item {
   background-color: transparent;
-  border: 2px solid #001524;
+  border: 2px solid #15616D;
   border-radius: 4px;
   width: 25%;
 }
@@ -82,7 +85,7 @@ body a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 90%;
+  width: 100%;
 }
 
 .main-background .main-categories div {
@@ -90,41 +93,36 @@ body a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 1em;
-  padding: 1em;
   width: 100%;
 }
 
-.main-background .main-categories article {
-  border: 2px solid #001524;
-  border-radius: 4px;
-  padding: 1em;
-  width: 100%;
-  margin: 1em 0;
+.main-background .main-categories div h2 {
+  margin-top: 3rem;
 }
 
-.main-background .main-categories article h2 {
-  border-bottom: 1px solid black;
+.main-background .main-categories div article {
+  width: 90%;
+  margin-bottom: 3rem;
 }
 
-.main-background .main-categories article .items-count {
+.main-background .main-categories div article .items-count {
   text-align: right;
 }
 
-.main-background .main-categories article header {
+.main-background .main-categories div article header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.main-background .main-categories article .buttons {
+.main-background .main-categories div article .buttons {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
 }
 
-.main-background .main-categories article .buttons button {
+.main-background .main-categories div article .buttons button {
   margin: 1em;
   background-color: transparent;
   color: #001524;
@@ -132,10 +130,30 @@ body a {
   border-radius: 4px;
 }
 
-.main-background .main-categories article .buttons button:hover {
+.main-background .main-categories div article .buttons button:hover {
   background-color: #D53E20;
   color: white;
   border: 2px solid #D53E20;
+}
+
+.main-background .main-categories div article hr {
+  border-bottom: 1px solid #001524;
+}
+
+.main-background .main-categories .category-movies {
+  background-color: #3B60E4;
+}
+
+.main-background .main-categories .category-restaurants {
+  background-color: #FF37A6;
+}
+
+.main-background .main-categories .category-books {
+  background-color: #A3E7FC;
+}
+
+.main-background .main-categories .category-products {
+  background-color: #70EB8D;
 }
 
 .main-background .gray-out {

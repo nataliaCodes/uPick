@@ -1,7 +1,11 @@
 body {
-  background-color: #FFF7EB !important;
+  background-color: #f7f4f4 !important;
   color: #15616D !important;
   font-family: 'Questrial', sans-serif !important;
+}
+
+body a {
+  color: #15616D;
 }
 
 .main-background {
@@ -33,20 +37,18 @@ body {
 .main-background .smart-add {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
+  width: 90%;
   margin-top: 15px;
   background-color: transparent;
-  border: 2px solid #001524;
-  border-radius: 4px;
-  width: 50%;
   margin-top: 30px;
   margin-bottom: 20px;
 }
 
 .main-background .smart-add .smart-add-box {
+  display: flex;
   flex-direction: column;
   width: 14em;
-  display: flex;
   margin-top: 10px;
   margin-bottom: 20px;
 }
@@ -58,6 +60,11 @@ body {
   border-bottom: 2px solid #001524;
   background-color: transparent;
   resize: none;
+}
+
+.main-background .smart-add .smart-add-box textarea:focus-visible {
+  border-style: hidden;
+  border-bottom: 2px solid #001524;
 }
 
 .main-background .smart-add .smart-add-box .new-item {
@@ -78,7 +85,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 90%;
+  width: 100%;
 }
 
 .main-background .main-categories div {
@@ -86,17 +93,11 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 1em;
-  padding: 1em;
   width: 100%;
 }
 
 .main-background .main-categories article {
-  border: 2px solid #001524;
-  border-radius: 4px;
-  padding: 1em;
   width: 100%;
-  margin: 1em 0;
 }
 
 .main-background .main-categories article h2 {
@@ -134,6 +135,22 @@ body {
   border: 2px solid #D53E20;
 }
 
+.main-background .main-categories .category-movies {
+  background-color: #3B60E4;
+}
+
+.main-background .main-categories .category-restaurants {
+  background-color: #FF37A6;
+}
+
+.main-background .main-categories .category-books {
+  background-color: #A3E7FC;
+}
+
+.main-background .main-categories .category-products {
+  background-color: #70EB8D;
+}
+
 .main-background .gray-out {
   color: #FF7D00;
   font-style: italic;
@@ -147,56 +164,49 @@ body {
   font-style: normal;
 }
 
-.grey-background .login-background .main-login {
-  font-family: 'Questrial', sans-serif;
+.login-background .main-login {
   display: flex;
   flex-direction: column;
   align-items: center;
   border: 1px solid #001524;
   border-radius: 2px;
   margin: 5em auto;
-  color: #15616D;
   width: 30em;
 }
 
-.grey-background .login-background .main-login .login-title {
+.login-background .main-login .login-title {
   margin-top: 10px;
   margin-bottom: 20px;
 }
 
-.grey-background .login-background .main-login .email-password-container {
+.login-background .main-login .email-password-container {
   margin-bottom: 15px;
 }
 
-.grey-background .login-background .main-login .email-password-container form {
+.login-background .main-login .email-password-container form {
   display: flex;
   flex-direction: column;
 }
 
-.grey-background .login-background .main-login .email-password-container form input {
+.login-background .main-login .email-password-container form input {
   background-color: transparent;
   border-style: hidden;
   border-bottom: 2px solid #001524;
 }
 
-.grey-background .login-background .main-login .email-password-container form .login-submit {
+.login-background .main-login .email-password-container form .login-submit {
   margin-top: 15px;
   background-color: transparent;
-  color: #15616D;
   border: 2px solid #001524;
   border-radius: 4px;
   width: 50%;
 }
 
-.grey-background .login-background .main-login .email-password-container form .login-submit:hover {
+.login-background .main-login .email-password-container form .login-submit:hover {
   background-color: #001524;
   color: white;
 }
 
-.grey-background .login-background .main-login h4 {
+.login-background .main-login h4 {
   margin-bottom: 1em;
-}
-
-.grey-background .login-background .main-login h4 a {
-  color: #15616D;
 }
