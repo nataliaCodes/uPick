@@ -14,10 +14,10 @@ $(() => {
 $(document).ready(() => {
 
   //loads index with all available content for specific user - function in helpers.js
-  loadCategory('.category-movies');
-  loadCategory('.category-restaurants');
-  loadCategory('.category-books');
-  loadCategory('.category-products');
+  loadCategory('.movies');
+  loadCategory('.restaurants');
+  loadCategory('.books');
+  loadCategory('.products');
 
   //loads only clicked category(nav bar) - functions in helpers.js
   $("#show-movies").click(() => {

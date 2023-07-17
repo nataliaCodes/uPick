@@ -1,15 +1,16 @@
 .navbar-light {
   font-size: 1.5em;
-  color: #15616D !important;
+  color: #C2BC90 !important;
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .navbar-light .navbar-brand {
   font-size: xx-large;
-  color: #15616D !important;
+  color: #C2BC90 !important;
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color: #15616D !important;
+  color: #C2BC90 !important;
 }
 
 .navbar-light .collapse button {
@@ -18,7 +19,7 @@
 }
 
 .navbar-light .collapse button:hover {
-  background-color: #D53E20;
+  background-color: #C2BC90;
 }
 
 .navbar-light .logout {
@@ -28,13 +29,14 @@
 
 .navbar-light #btn-logout {
   background-color: transparent;
-  border: 2px solid #001524;
+  border: 2px solid #C2BC90;
   border-radius: 4px;
   font-size: smaller;
+  color: #C2BC90;
 }
 
 .navbar-light #btn-logout:hover {
-  background-color: #D53E20;
+  background-color: #C2BC90;
   border: transparent;
   color: white;
 }

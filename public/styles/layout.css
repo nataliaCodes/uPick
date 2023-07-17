@@ -1,5 +1,6 @@
 body {
-  background-color: #f7f4f4 !important;
+  background-color: #548f9e !important;
+  background-image: url("/img/fun-backd.png");
   color: #001524 !important;
   font-family: 'Questrial', sans-serif !important;
 }
@@ -75,9 +76,9 @@ body a {
 }
 
 .main-background .smart-add .smart-add-box .new-item:hover {
-  background-color: #D53E20;
+  background-color: #C2BC90;
   color: white;
-  border: 2px solid #D53E20;
+  border: 2px solid #C2BC90;
 }
 
 .main-background .main-categories {
@@ -98,6 +99,7 @@ body a {
 
 .main-background .main-categories div h2 {
   margin-top: 3rem;
+  text-transform: capitalize;
 }
 
 .main-background .main-categories div article {
@@ -131,38 +133,32 @@ body a {
 }
 
 .main-background .main-categories div article .buttons button:hover {
-  background-color: #D53E20;
+  background-color: #C2BC90;
   color: white;
-  border: 2px solid #D53E20;
+  border: 2px solid #C2BC90;
 }
 
 .main-background .main-categories div article hr {
   border-bottom: 1px solid #001524;
 }
 
-.main-background .main-categories .category-movies {
-  background-color: #3B60E4;
+.main-background .main-categories .dark-category {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #001524;
 }
 
-.main-background .main-categories .category-restaurants {
-  background-color: #FF37A6;
-}
-
-.main-background .main-categories .category-books {
-  background-color: #A3E7FC;
-}
-
-.main-background .main-categories .category-products {
-  background-color: #70EB8D;
+.main-background .main-categories .light-category {
+  background-color: rgba(255, 255, 255, 0.4);
+  color: #C2BC90;
 }
 
 .main-background .gray-out {
-  color: #FF7D00;
+  color: #C2BC90;
   font-style: italic;
 }
 
 .main-background .gray-out h3 {
-  color: #FF7D00;
+  color: #C2BC90;
 }
 
 .main-background .gray-out .buttons {

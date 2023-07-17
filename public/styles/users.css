@@ -1,6 +1,6 @@
 body {
   background-color: #15616D !important;
-  background: url("../public/fun-backd.png");
+  background-image: url("/img/fun-backd.png");
   color: #001524 !important;
   font-family: 'Questrial', sans-serif !important;
 }

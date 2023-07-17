@@ -1,11 +1,12 @@
 body {
-  background-color: #f7f4f4 !important;
-  color: #15616D !important;
+  background-color: #548f9e !important;
+  background-image: url("/img/fun-backd.png");
+  color: #001524 !important;
   font-family: 'Questrial', sans-serif !important;
 }
 
 body a {
-  color: #15616D;
+  color: #001524;
 }
 
 .main-background {
@@ -18,7 +19,7 @@ body a {
   background-color: transparent;
   margin-top: 8em;
   padding: 5em 10em;
-  border: 1px solid #001524;
+  border: 1px solid #15616D;
   border-radius: 2px;
 }
 
@@ -57,19 +58,19 @@ body a {
   height: 2em;
   width: 14em;
   border-style: hidden;
-  border-bottom: 2px solid #001524;
+  border-bottom: 2px solid #15616D;
   background-color: transparent;
   resize: none;
 }
 
 .main-background .smart-add .smart-add-box textarea:focus-visible {
   border-style: hidden;
-  border-bottom: 2px solid #001524;
+  border-bottom: 2px solid #15616D;
 }
 
 .main-background .smart-add .smart-add-box .new-item {
   background-color: transparent;
-  border: 2px solid #001524;
+  border: 2px solid #15616D;
   border-radius: 4px;
   width: 25%;
 }
@@ -96,32 +97,33 @@ body a {
   width: 100%;
 }
 
-.main-background .main-categories article {
-  width: 100%;
+.main-background .main-categories div h2 {
+  margin-top: 3rem;
 }
 
-.main-background .main-categories article h2 {
-  border-bottom: 1px solid black;
+.main-background .main-categories div article {
+  width: 90%;
+  margin-bottom: 3rem;
 }
 
-.main-background .main-categories article .items-count {
+.main-background .main-categories div article .items-count {
   text-align: right;
 }
 
-.main-background .main-categories article header {
+.main-background .main-categories div article header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.main-background .main-categories article .buttons {
+.main-background .main-categories div article .buttons {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
 }
 
-.main-background .main-categories article .buttons button {
+.main-background .main-categories div article .buttons button {
   margin: 1em;
   background-color: transparent;
   color: #001524;
@@ -129,10 +131,14 @@ body a {
   border-radius: 4px;
 }
 
-.main-background .main-categories article .buttons button:hover {
+.main-background .main-categories div article .buttons button:hover {
   background-color: #D53E20;
   color: white;
   border: 2px solid #D53E20;
+}
+
+.main-background .main-categories div article hr {
+  border-bottom: 1px solid #001524;
 }
 
 .main-background .main-categories .category-movies {
@@ -168,7 +174,7 @@ body a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid #001524;
+  border: 1px solid #15616D;
   border-radius: 4px;
   margin: 5em auto;
   width: 30em;
@@ -191,19 +197,19 @@ body a {
 .main-register .form input {
   background-color: transparent;
   border-style: hidden;
-  border-bottom: 2px solid #001524;
+  border-bottom: 2px solid #15616D;
 }
 
 .main-register .form .signup-submit {
   margin-top: 15px;
   background-color: transparent;
-  border: 2px solid #001524;
+  border: 2px solid #15616D;
   border-radius: 4px;
   width: 50%;
 }
 
 .main-register .form .signup-submit:hover {
-  background-color: #001524;
+  background-color: #15616D;
   color: white;
 }
 
