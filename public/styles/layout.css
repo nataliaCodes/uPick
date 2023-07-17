@@ -1,85 +1,83 @@
-.grey-background {
-  background-color: #EAE7DC;
+body {
+  background-color: #FFF7EB !important;
+  color: #15616D !important;
+  font-family: 'Questrial', sans-serif !important;
 }
 
-.grey-background .main-background {
-  font-family: 'Questrial', sans-serif;
-  background-color: #EAE7DC;
-  color: #8E8D8A;
+body a {
+  color: #15616D;
+}
+
+.main-background {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.grey-background .main-background .jumbotron {
+.main-background .jumbotron {
   background-color: transparent;
   margin-top: 8em;
   padding: 5em 10em;
-  border: 1px solid #E85A4F;
+  border: 1px solid #001524;
   border-radius: 2px;
 }
 
-.grey-background .main-background .jumbotron h1 {
-  color: #E85A4F;
+.main-background .jumbotron h1 {
   text-align: center;
 }
 
-.grey-background .main-background h1 {
-  color: #244751;
-}
-
-.grey-background .main-background .modal-notify .modal-header {
+.main-background .modal-notify .modal-header {
   border-radius: 3px 3px 0 0;
 }
 
-.grey-background .main-background .modal-notify .modal-content {
+.main-background .modal-notify .modal-content {
   border-radius: 3px;
 }
 
-.grey-background .main-background .smart-add {
-  margin-top: 15px;
-  background-color: transparent;
-  border: 2px solid #E98074;
-  border-radius: 4px;
-  width: 50%;
+.main-background .smart-add {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-top: 15px;
+  background-color: transparent;
+  border: 2px solid #001524;
+  border-radius: 4px;
+  width: 50%;
   margin-top: 30px;
   margin-bottom: 20px;
 }
 
-.grey-background .main-background .smart-add .smart-add-box {
+.main-background .smart-add .smart-add-box {
+  flex-direction: column;
   width: 14em;
   display: flex;
-  flex-direction: column;
   margin-top: 10px;
   margin-bottom: 20px;
 }
 
-.grey-background .main-background .smart-add .smart-add-box textarea {
+.main-background .smart-add .smart-add-box textarea {
   height: 2em;
   width: 14em;
   border-style: hidden;
-  border-bottom: 2px solid #E85A4F;
+  border-bottom: 2px solid #001524;
   background-color: transparent;
   resize: none;
 }
 
-.grey-background .main-background .smart-add .smart-add-box .new-item {
+.main-background .smart-add .smart-add-box .new-item {
   background-color: transparent;
-  color: black;
-  border: 2px solid #E98074;
+  border: 2px solid #001524;
   border-radius: 4px;
   width: 25%;
 }
 
-.grey-background .main-background .smart-add .smart-add-box .new-item:hover {
-  background-color: #E98074;
+.main-background .smart-add .smart-add-box .new-item:hover {
+  background-color: #D53E20;
   color: white;
+  border: 2px solid #D53E20;
 }
 
-.grey-background .main-background .main-categories {
+.main-background .main-categories {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -87,15 +85,7 @@
   width: 90%;
 }
 
-.grey-background .main-background .main-categories h2 {
-  color: #E85A4F;
-}
-
-.grey-background .main-background .main-categories h3 {
-  color: #E85A4F;
-}
-
-.grey-background .main-background .main-categories div {
+.main-background .main-categories div {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -105,48 +95,58 @@
   width: 100%;
 }
 
-.grey-background .main-background .main-categories article {
-  border: 2px solid #D8C3A5;
+.main-background .main-categories article {
+  border: 2px solid #001524;
   border-radius: 4px;
   padding: 1em;
   width: 100%;
   margin: 1em 0;
 }
 
-.grey-background .main-background .main-categories article h2 {
+.main-background .main-categories article h2 {
   border-bottom: 1px solid black;
 }
 
-.grey-background .main-background .main-categories article .items-count {
+.main-background .main-categories article .items-count {
   text-align: right;
 }
 
-.grey-background .main-background .main-categories article header {
+.main-background .main-categories article header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.grey-background .main-background .main-categories article .buttons {
+.main-background .main-categories article .buttons {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
 }
 
-.grey-background .main-background .main-categories article .buttons button {
+.main-background .main-categories article .buttons button {
   margin: 1em;
   background-color: transparent;
-  color: black;
-  border: 2px solid #E98074;
+  color: #001524;
+  border: 2px solid #001524;
   border-radius: 4px;
 }
 
-.grey-background .main-background .main-categories article .buttons .button:hover {
-  background-color: #E98074;
+.main-background .main-categories article .buttons button:hover {
+  background-color: #D53E20;
   color: white;
+  border: 2px solid #D53E20;
 }
 
-.grey-background .main-background .gray-out {
-  color: lightcoral;
+.main-background .gray-out {
+  color: #FF7D00;
+  font-style: italic;
+}
+
+.main-background .gray-out h3 {
+  color: #FF7D00;
+}
+
+.main-background .gray-out .buttons {
+  font-style: normal;
 }

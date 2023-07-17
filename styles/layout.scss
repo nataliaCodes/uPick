@@ -1,55 +1,58 @@
-// See: https://sass-lang.com/
+@import './global_colors';
 
-.grey-background {
-  background-color: #EAE7DC;
+body {
+  background-color: $body-color !important;
+  color: $text-color !important;
+  font-family: 'Questrial', sans-serif !important;
 
+  a {
+    color: $text-color;
+  }
+}
 
-  .main-background {
-  font-family: 'Questrial', sans-serif;
-  background-color: #EAE7DC;
-  color: #8E8D8A;
+.main-background {
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   align-items: center;
 
   .jumbotron {
     background-color: transparent;
     margin-top: 8em;
     padding: 5em 10em;
-    border: 1px solid #E85A4F;
+    border: 1px solid $border-color;
     border-radius: 2px;
-    h1 {
-      color: #E85A4F;
-    }
-  }
 
-  h1 {
-    color: #244751;
+    h1 {
+      text-align: center;
+    }
   }
 
   .modal-notify .modal-header {
     border-radius: 3px 3px 0 0;
   }
+
   .modal-notify .modal-content {
     border-radius: 3px;
   }
 
   .smart-add {
-    margin-top: 15px;
-    background-color: transparent;
-    border: 2px solid #E98074;
-    border-radius: 4px;
-    width: 50%;
     display: flex;
     flex-direction: row;
     justify-content: center;
+
+    margin-top: 15px;
+    background-color: transparent;
+    border: 2px solid $border-color;
+    border-radius: 4px;
+    width: 50%;
     margin-top: 30px;
     margin-bottom: 20px;
 
     .smart-add-box {
+      flex-direction: column;
+
       width: 14em;
       display: flex;
-      flex-direction: column;
       margin-top: 10px;
       margin-bottom: 20px;
 
@@ -57,58 +60,47 @@
         height: 2em;
         width: 14em;
         border-style: hidden;
-        border-bottom: 2px solid #E85A4F;
+        border-bottom: 2px solid $border-color;
         background-color: transparent;
         resize: none;
       }
 
       .new-item {
         background-color: transparent;
-        color: black;
-        border: 2px solid #E98074;
+        border: 2px solid $border-color;
         border-radius: 4px;
         width: 25%;
-      }
 
-      .new-item:hover {
-        background-color: #E98074;
-        color: white;
+        &:hover {
+          background-color: $hover-color;
+          color: white;
+          border: 2px solid $hover-color;
+        }
       }
     }
-
   }
 
   .main-categories {
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     width: 90%;
-
-    h2 {
-      color: #E85A4F;
-    }
-
-    h3 {
-      color: #E85A4F;
-    }
 
     div {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
       margin-top: 1em;
       padding: 1em;
       width: 100%;
-
-
-
     }
 
     article {
-      border: 2px solid #D8C3A5;
+      border: 2px solid $border-color;
       border-radius: 4px;
       padding: 1em;
       width: 100%;
@@ -137,35 +129,30 @@
         button {
           margin: 1em;
           background-color: transparent;
-          color: black;
-          border: 2px solid #E98074;
+          color: $border-color;
+          border: 2px solid $border-color;
           border-radius: 4px;
 
+          &:hover {
+            background-color: $hover-color;
+            color: white;
+            border: 2px solid $hover-color;
+          }
         }
-
-        .button:hover {
-          background-color: #E98074;
-          color: white;
-        }
-
       }
     }
   }
 
   .gray-out {
-    color: lightcoral;
+    color: $accent-color;
+    font-style: italic;
+
+    h3 {
+      color: $accent-color;
+    }
+
+    .buttons {
+      font-style: normal;
+    }
   }
-
-
-
-  }
-
-
 }
-
-
-
-
-
-
-

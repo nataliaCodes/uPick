@@ -1,41 +1,44 @@
-// this is the main nav container
-nav {
+@import './global_colors';
+
+.navbar-light {
   font-size: 1.5em;
-  font-family: 'Questrial', sans-serif;
-  background-color: #EAE7DC;
-  color: #8E8D8A;
 
   .navbar-brand {
-    font-size: larger;
+    font-size: xx-large;
+    color: $text-color !important;
+  }
 
+  .navbar-nav .nav-link {
+    color: $text-color !important;
   }
+
   .collapse button {
-    background-color: #E85A4F;
-  }
-  .collapse button:hover {
-    background-color: #E98074;
+    background-color: $text-color;
     color: white;
+
+    &:hover {
+      background-color: $hover-color;
+    }
+  }
+
+  .logout {
+    width: 5rem;
+    margin-bottom: 0.2rem;
   }
 
   #btn-logout {
     background-color: transparent;
-    border: 2px solid #E98074;
+    border: 2px solid $text-color;
     border-radius: 4px;
     font-size: smaller;
 
-  }
-
-  #btn-logout:hover {
-    background-color: #E98074;
-    color: white;
+    &:hover {
+      background-color: $hover-color;
+      border: transparent;
+      color: white;
+    }
   }
 }
-
-
-
-
 
 // Desktop
-@media only screen and (min-width: 1024px) {
-
-}
+@media only screen and (min-width: 1024px) {}

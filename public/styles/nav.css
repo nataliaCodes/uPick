@@ -1,31 +1,39 @@
-nav {
+.navbar-light {
   font-size: 1.5em;
-  font-family: 'Questrial', sans-serif;
-  background-color: #EAE7DC;
-  color: #8E8D8A;
 }
 
-nav .navbar-brand {
-  font-size: larger;
+.navbar-light .navbar-brand {
+  font-size: xx-large;
+  color: #15616D !important;
 }
 
-nav .collapse button {
-  background-color: #E85A4F;
+.navbar-light .navbar-nav .nav-link {
+  color: #15616D !important;
 }
 
-nav .collapse button:hover {
-  background-color: #E98074;
+.navbar-light .collapse button {
+  background-color: #15616D;
   color: white;
 }
 
-nav #btn-logout {
+.navbar-light .collapse button:hover {
+  background-color: #D53E20;
+}
+
+.navbar-light .logout {
+  width: 5rem;
+  margin-bottom: 0.2rem;
+}
+
+.navbar-light #btn-logout {
   background-color: transparent;
-  border: 2px solid #E98074;
+  border: 2px solid #15616D;
   border-radius: 4px;
   font-size: smaller;
 }
 
-nav #btn-logout:hover {
-  background-color: #E98074;
+.navbar-light #btn-logout:hover {
+  background-color: #D53E20;
+  border: transparent;
   color: white;
 }

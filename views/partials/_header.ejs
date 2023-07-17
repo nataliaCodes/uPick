@@ -8,7 +8,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <% if (user) { %>
-        <div class="btn-group dropright">
+        <div class="btn-group dropright mb-1">
           <button class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             Categories
@@ -20,16 +20,16 @@
             <a class="dropdown-item" id="show-products">Products</a>
           </div>
         </div>
-        <ul class="navbar-nav ml-auto">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/users/<%= user.id %>">Profile</a>
-            </li>
-          </ul>
-          <li class="nav-item">
-            <a class="nav-link" href="">Logged in as: <%= user.email %></a>
+        <ul class="navbar-nav ml-auto d-flex align-items-center">
+          <li class="nav-item align-self-center">
+            <p class="m-auto">
+              Logged in as: <%= user.email %> |
+            </p>
           </li>
-          <li class="nav-item">
+          <li class="nav-item align-self-center">
+            <a class="nav-link" href="/users/<%= user.id %>">Profile</a>
+          </li>
+          <li class="nav-item logout align-self-center">
             <form action="/logout" method="POST">
               <input type="submit" name="submit" value="Logout" id="btn-logout">
             </form>

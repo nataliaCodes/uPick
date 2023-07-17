@@ -1,5 +1,150 @@
-.grey-background {
-  background-color: #EAE7DC;
+body {
+  background-color: #FFF7EB !important;
+  color: #15616D !important;
+  font-family: 'Questrial', sans-serif !important;
+}
+
+.main-background {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-background .jumbotron {
+  background-color: transparent;
+  margin-top: 8em;
+  padding: 5em 10em;
+  border: 1px solid #001524;
+  border-radius: 2px;
+}
+
+.main-background .jumbotron h1 {
+  text-align: center;
+}
+
+.main-background .modal-notify .modal-header {
+  border-radius: 3px 3px 0 0;
+}
+
+.main-background .modal-notify .modal-content {
+  border-radius: 3px;
+}
+
+.main-background .smart-add {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 15px;
+  background-color: transparent;
+  border: 2px solid #001524;
+  border-radius: 4px;
+  width: 50%;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.main-background .smart-add .smart-add-box {
+  flex-direction: column;
+  width: 14em;
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.main-background .smart-add .smart-add-box textarea {
+  height: 2em;
+  width: 14em;
+  border-style: hidden;
+  border-bottom: 2px solid #001524;
+  background-color: transparent;
+  resize: none;
+}
+
+.main-background .smart-add .smart-add-box .new-item {
+  background-color: transparent;
+  border: 2px solid #001524;
+  border-radius: 4px;
+  width: 25%;
+}
+
+.main-background .smart-add .smart-add-box .new-item:hover {
+  background-color: #D53E20;
+  color: white;
+  border: 2px solid #D53E20;
+}
+
+.main-background .main-categories {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+}
+
+.main-background .main-categories div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1em;
+  padding: 1em;
+  width: 100%;
+}
+
+.main-background .main-categories article {
+  border: 2px solid #001524;
+  border-radius: 4px;
+  padding: 1em;
+  width: 100%;
+  margin: 1em 0;
+}
+
+.main-background .main-categories article h2 {
+  border-bottom: 1px solid black;
+}
+
+.main-background .main-categories article .items-count {
+  text-align: right;
+}
+
+.main-background .main-categories article header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-background .main-categories article .buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.main-background .main-categories article .buttons button {
+  margin: 1em;
+  background-color: transparent;
+  color: #001524;
+  border: 2px solid #001524;
+  border-radius: 4px;
+}
+
+.main-background .main-categories article .buttons button:hover {
+  background-color: #D53E20;
+  color: white;
+  border: 2px solid #D53E20;
+}
+
+.main-background .gray-out {
+  color: #FF7D00;
+  font-style: italic;
+}
+
+.main-background .gray-out h3 {
+  color: #FF7D00;
+}
+
+.main-background .gray-out .buttons {
+  font-style: normal;
 }
 
 .grey-background .login-background .main-login {
@@ -7,10 +152,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid #E85A4F;
+  border: 1px solid #001524;
   border-radius: 2px;
   margin: 5em auto;
-  color: #8E8D8A;
+  color: #15616D;
   width: 30em;
 }
 
@@ -31,20 +176,20 @@
 .grey-background .login-background .main-login .email-password-container form input {
   background-color: transparent;
   border-style: hidden;
-  border-bottom: 2px solid #E98074;
+  border-bottom: 2px solid #001524;
 }
 
 .grey-background .login-background .main-login .email-password-container form .login-submit {
   margin-top: 15px;
   background-color: transparent;
-  color: black;
-  border: 2px solid #E98074;
+  color: #15616D;
+  border: 2px solid #001524;
   border-radius: 4px;
   width: 50%;
 }
 
 .grey-background .login-background .main-login .email-password-container form .login-submit:hover {
-  background-color: #E98074;
+  background-color: #001524;
   color: white;
 }
 
@@ -53,5 +198,5 @@
 }
 
 .grey-background .login-background .main-login h4 a {
-  color: #E85A4F;
+  color: #15616D;
 }
