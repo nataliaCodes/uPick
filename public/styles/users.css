@@ -1,64 +1,231 @@
-.grey-background {
-  background-color: #EAE7DC;
-  font-family: 'Questrial', sans-serif;
+body {
+  background-color: #15616D !important;
+  background: url("../public/fun-backd.png");
+  color: #001524 !important;
+  font-family: 'Questrial', sans-serif !important;
 }
 
-.grey-background div.profile-container {
+body a {
+  color: #001524;
+}
+
+.main-background {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-background .jumbotron {
+  background-color: transparent;
+  margin-top: 8em;
+  padding: 5em 10em;
+  border: 1px solid #15616D;
+  border-radius: 2px;
+}
+
+.main-background .jumbotron h1 {
+  text-align: center;
+}
+
+.main-background .modal-notify .modal-header {
+  border-radius: 3px 3px 0 0;
+}
+
+.main-background .modal-notify .modal-content {
+  border-radius: 3px;
+}
+
+.main-background .smart-add {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 90%;
+  margin-top: 15px;
+  background-color: transparent;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.main-background .smart-add .smart-add-box {
+  display: flex;
+  flex-direction: column;
+  width: 14em;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.main-background .smart-add .smart-add-box textarea {
+  height: 2em;
+  width: 14em;
+  border-style: hidden;
+  border-bottom: 2px solid #15616D;
+  background-color: transparent;
+  resize: none;
+}
+
+.main-background .smart-add .smart-add-box textarea:focus-visible {
+  border-style: hidden;
+  border-bottom: 2px solid #15616D;
+}
+
+.main-background .smart-add .smart-add-box .new-item {
+  background-color: transparent;
+  border: 2px solid #15616D;
+  border-radius: 4px;
+  width: 25%;
+}
+
+.main-background .smart-add .smart-add-box .new-item:hover {
+  background-color: #D53E20;
+  color: white;
+  border: 2px solid #D53E20;
+}
+
+.main-background .main-categories {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.main-background .main-categories div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.main-background .main-categories div h2 {
+  margin-top: 3rem;
+}
+
+.main-background .main-categories div article {
+  width: 90%;
+  margin-bottom: 3rem;
+}
+
+.main-background .main-categories div article .items-count {
+  text-align: right;
+}
+
+.main-background .main-categories div article header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-background .main-categories div article .buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.main-background .main-categories div article .buttons button {
+  margin: 1em;
+  background-color: transparent;
+  color: #001524;
+  border: 2px solid #001524;
+  border-radius: 4px;
+}
+
+.main-background .main-categories div article .buttons button:hover {
+  background-color: #D53E20;
+  color: white;
+  border: 2px solid #D53E20;
+}
+
+.main-background .main-categories div article hr {
+  border-bottom: 1px solid #001524;
+}
+
+.main-background .main-categories .category-movies {
+  background-color: #3B60E4;
+}
+
+.main-background .main-categories .category-restaurants {
+  background-color: #FF37A6;
+}
+
+.main-background .main-categories .category-books {
+  background-color: #A3E7FC;
+}
+
+.main-background .main-categories .category-products {
+  background-color: #70EB8D;
+}
+
+.main-background .gray-out {
+  color: #FF7D00;
+  font-style: italic;
+}
+
+.main-background .gray-out h3 {
+  color: #FF7D00;
+}
+
+.main-background .gray-out .buttons {
+  font-style: normal;
+}
+
+div.profile-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 2px solid #E85A4F;
+  border: 2px solid #15616D;
   border-radius: 4px;
   width: 55%;
   margin: 2em auto;
 }
 
-.grey-background div.profile-container div.card {
+div.profile-container div.card {
   width: 50%;
   margin-top: 3em;
 }
 
-.grey-background div.profile-container div.user-inputs {
+div.profile-container div.user-inputs {
   margin: 5em 0;
 }
 
-.grey-background div.profile-container div.user-inputs div.form-group {
+div.profile-container div.user-inputs div.form-group {
   border-radius: 4px;
-  border: 2px solid #E98074;
+  border: 2px solid #15616D;
 }
 
-.grey-background div.profile-container div.user-inputs div.form-group input {
+div.profile-container div.user-inputs div.form-group input {
   background-color: transparent;
 }
 
-.grey-background div.profile-container div.buttons {
-  margin-top: 1em;
+div.profile-container div.buttons {
   display: flex;
   justify-content: space-between;
+  margin-top: 1em;
 }
 
-.grey-background div.profile-container div.buttons .btn-submit {
-  background-color: #E98074;
+div.profile-container div.buttons .btn-submit {
+  background-color: #15616D;
   color: white;
-  border: 2px solid #E98074;
+  border: 2px solid #15616D;
   border-radius: 4px;
   padding: 0.5em;
 }
 
-.grey-background div.profile-container div.buttons .btn-submit:hover {
+div.profile-container div.buttons .btn-submit:hover {
+  border: 2px solid #15616D;
   background-color: transparent;
-  color: black;
+  color: #15616D;
 }
 
-.grey-background div.profile-container div.buttons .btn-cancel {
+div.profile-container div.buttons .btn-cancel {
   background-color: transparent;
-  color: black;
-  border: 2px solid #E98074;
+  border: 2px solid #15616D;
   border-radius: 4px;
 }
 
-.grey-background div.profile-container div.buttons .btn-cancel:hover {
-  background-color: #E98074;
+div.profile-container div.buttons .btn-cancel:hover {
+  background-color: #15616D;
   color: white;
 }

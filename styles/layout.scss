@@ -1,7 +1,8 @@
 @import './global_colors';
 
 body {
-  background-color: $body-color !important;
+  background-color: $nav-color !important;
+  background: url('../public/fun-backd.png');
   color: $text-color !important;
   font-family: 'Questrial', sans-serif !important;
 

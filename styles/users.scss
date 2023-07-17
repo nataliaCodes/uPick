@@ -44,7 +44,9 @@ div.profile-container {
       padding: 0.5em;
 
       &:hover {
+        border: 2px solid $nav-color;
         background-color: transparent;
+        color: $nav-color;
       }
     }
 
