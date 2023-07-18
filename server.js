@@ -32,7 +32,7 @@ app.use("/styles", sass({
   outputStyle: 'expanded'
 }));
 app.use(express.static("public"));
-app.use('/img', express.static('img'));
+app.use('/img', express.static('img'))
 app.use(
   cookieSession({
     name: 'session',

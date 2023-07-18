@@ -1,12 +1,32 @@
 body {
-  background-color: #15616D !important;
+  background-color: #32565F !important;
   background-image: url("/img/fun-backd.png");
+  background-attachment: fixed;
   color: #001524 !important;
   font-family: 'Questrial', sans-serif !important;
 }
 
 body a {
   color: #001524;
+}
+
+body > header {
+  position: sticky;
+  top: 0px;
+  left: 0px;
+}
+
+body p:not(.m-auto) {
+  font-size: larger;
+}
+
+body h5 {
+  font-size: 1.5rem;
+}
+
+body h3 {
+  font-size: 2rem;
+  width: 85%;
 }
 
 .main-background {
@@ -39,46 +59,42 @@ body a {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  width: 90%;
-  margin-top: 15px;
-  background-color: transparent;
-  margin-top: 30px;
-  margin-bottom: 20px;
+  width: 100%;
+  background-color: #c2bc9081;
 }
 
 .main-background .smart-add .smart-add-box {
   display: flex;
   flex-direction: column;
   width: 14em;
-  margin-top: 10px;
-  margin-bottom: 20px;
+  margin: 2em 0;
+  margin-left: 5%;
 }
 
 .main-background .smart-add .smart-add-box textarea {
   height: 2em;
   width: 14em;
   border-style: hidden;
-  border-bottom: 2px solid #15616D;
+  border-bottom: 2px solid #001524;
   background-color: transparent;
   resize: none;
 }
 
 .main-background .smart-add .smart-add-box textarea:focus-visible {
-  border-style: hidden;
-  border-bottom: 2px solid #15616D;
+  outline: none;
 }
 
 .main-background .smart-add .smart-add-box .new-item {
   background-color: transparent;
-  border: 2px solid #15616D;
+  border: 2px solid #001524;
   border-radius: 4px;
   width: 25%;
 }
 
 .main-background .smart-add .smart-add-box .new-item:hover {
-  background-color: #D53E20;
+  background-color: #C2BC90;
   color: white;
-  border: 2px solid #D53E20;
+  border: 2px solid #C2BC90;
 }
 
 .main-background .main-categories {
@@ -99,6 +115,7 @@ body a {
 
 .main-background .main-categories div h2 {
   margin-top: 3rem;
+  text-transform: capitalize;
 }
 
 .main-background .main-categories div article {
@@ -121,49 +138,66 @@ body a {
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
+  width: 15%;
 }
 
 .main-background .main-categories div article .buttons button {
   margin: 1em;
+}
+
+.main-background .main-categories div:not(.buttons):nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #C2BC90;
+  text-shadow: 5px 5px 5px #001524;
+}
+
+.main-background .main-categories div:not(.buttons):nth-child(odd) button {
+  background-color: transparent;
+  color: #C2BC90;
+  border: 2px solid #C2BC90;
+  border-radius: 4px;
+}
+
+.main-background .main-categories div:not(.buttons):nth-child(odd) button:hover {
+  background-color: #C2BC90;
+  border: 2px solid #C2BC90;
+  color: #001524;
+}
+
+.main-background .main-categories div:not(.buttons):nth-child(odd) hr {
+  border-bottom: 1px solid #C2BC90;
+}
+
+.main-background .main-categories div:not(.buttons):nth-child(even) {
+  background-color: #c2bc9081;
+  color: #001524;
+  text-shadow: 5px 5px 5px #C2BC90;
+}
+
+.main-background .main-categories div:not(.buttons):nth-child(even) button {
   background-color: transparent;
   color: #001524;
   border: 2px solid #001524;
   border-radius: 4px;
 }
 
-.main-background .main-categories div article .buttons button:hover {
-  background-color: #D53E20;
-  color: white;
-  border: 2px solid #D53E20;
+.main-background .main-categories div:not(.buttons):nth-child(even) button:hover {
+  background-color: #001524;
+  border: 2px solid #001524;
+  color: #C2BC90;
 }
 
-.main-background .main-categories div article hr {
+.main-background .main-categories div:not(.buttons):nth-child(even) hr {
   border-bottom: 1px solid #001524;
 }
 
-.main-background .main-categories .category-movies {
-  background-color: #3B60E4;
-}
-
-.main-background .main-categories .category-restaurants {
-  background-color: #FF37A6;
-}
-
-.main-background .main-categories .category-books {
-  background-color: #A3E7FC;
-}
-
-.main-background .main-categories .category-products {
-  background-color: #70EB8D;
-}
-
 .main-background .gray-out {
-  color: #FF7D00;
+  color: #C2BC90;
   font-style: italic;
 }
 
 .main-background .gray-out h3 {
-  color: #FF7D00;
+  color: #C2BC90;
 }
 
 .main-background .gray-out .buttons {

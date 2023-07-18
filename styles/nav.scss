@@ -3,23 +3,42 @@
 .navbar-light {
   font-size: 1.5em;
   color: $accent-color !important;
-  background: rgba(0, 0, 0, 0.7);
+  background: $body-color url('/img/fun-backd.png');
 
   .navbar-brand {
     font-size: xx-large;
     color: $accent-color !important;
+    background: $body-color;
+    padding: 0 0.7rem;
   }
 
-  .navbar-nav .nav-link {
-    color: $accent-color !important;
+  .navbar-nav {
+    background: $body-color;
+    padding: 0 0.7rem;
+    
+    .nav-link {
+      color: $accent-color !important;
+    }
   }
 
   .collapse button {
-    background-color: $nav-color;
-    color: white;
+    background-color: $text-color;
+    color: $accent-color;
+    font-weight: bold;
 
     &:hover {
       background-color: $accent-color;
+      color: $text-color;
+    }
+  }
+
+  .dropdown-menu {
+    background-color: $accent-color;
+    color: $text-color;
+
+    .dropdown-item:hover {
+      background-color: $transparent-black;
+      color: $text-color;
     }
   }
 
@@ -38,7 +57,7 @@
     &:hover {
       background-color: $accent-color;
       border: transparent;
-      color: white;
+      color: $text-color;
     }
   }
 }

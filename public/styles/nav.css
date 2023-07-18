@@ -1,12 +1,19 @@
 .navbar-light {
   font-size: 1.5em;
   color: #C2BC90 !important;
-  background: rgba(0, 0, 0, 0.7);
+  background: #32565F url("/img/fun-backd.png");
 }
 
 .navbar-light .navbar-brand {
   font-size: xx-large;
   color: #C2BC90 !important;
+  background: #32565F;
+  padding: 0 0.7rem;
+}
+
+.navbar-light .navbar-nav {
+  background: #32565F;
+  padding: 0 0.7rem;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -14,12 +21,24 @@
 }
 
 .navbar-light .collapse button {
-  background-color: #15616D;
-  color: white;
+  background-color: #001524;
+  color: #C2BC90;
+  font-weight: bold;
 }
 
 .navbar-light .collapse button:hover {
   background-color: #C2BC90;
+  color: #001524;
+}
+
+.navbar-light .dropdown-menu {
+  background-color: #C2BC90;
+  color: #001524;
+}
+
+.navbar-light .dropdown-menu .dropdown-item:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #001524;
 }
 
 .navbar-light .logout {
@@ -38,5 +57,5 @@
 .navbar-light #btn-logout:hover {
   background-color: #C2BC90;
   border: transparent;
-  color: white;
+  color: #001524;
 }

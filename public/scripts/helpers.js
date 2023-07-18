@@ -43,8 +43,8 @@ const createCategoryDisplay = function (queryResult, category) {
   categoryContainer.append(itemCounter);
   let itemId = 0;
   for (const obj of queryResult) {
-    const item = $(`<article id="${category}-${itemId}">`);
-    const myId = `#${category}` + `${itemId}`;
+    const item = $(`<article id="${catTitle.slice(0, -1)}-${itemId}">`);
+    const myId = `#${catTitle.slice(0, -1)}` + `${itemId}`;
     //needed to communicate to back-end
     const id = obj.id;
     //create elements of category item
@@ -53,8 +53,8 @@ const createCategoryDisplay = function (queryResult, category) {
     const buttonsContainer = $('<div class="buttons">');
     const rating = $('<h5>').text(`Rating: ${obj.rating}`);
     const synopsis = obj.synopsis ? $('<p>').text(`${obj.synopsis}`) : null;
-    const address = obj.city ? $('<h6>').text(`${obj.street}, ${obj.city}, ${obj.province}, ${obj.post_code}, ${obj.country}`) : null;
-    const price = obj. price ? $('<h6>').text(`Price: $${obj.price / 100}`) : null;
+    const address = obj.city ? $('<p>').text(`${obj.street}, ${obj.city}, ${obj.province}, ${obj.post_code}, ${obj.country}`) : null;
+    const price = obj. price ? $('<p>').text(`Price: $${obj.price / 100}`) : null;
 
     //for now only applies class, need to put in state+db
     const doneButton = createDoneButton(myId);
@@ -95,7 +95,7 @@ const loadCategory = function (category) {
         '.books': books,
         '.products': products
       }
-      $(`${category}`).append(createCategoryDisplay(catArrays[`${category}`], `${category}`))
+      $(`${category}`).append(createCategoryDisplay(catArrays[`${category}`], `${category}`));
     })
     .catch(err => console.log(err))
     .always(() => console.log('Ajax call successful'));
