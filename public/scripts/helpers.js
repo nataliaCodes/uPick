@@ -1,5 +1,6 @@
 const categories = ['.movies', '.restaurants', '.books', '.products'];
 
+//for now only applies class, need to put in state+db
 const createDoneButton = function (itemId) {
   return $('<button type="input" class="done-button">')
     .text('Done')
@@ -9,16 +10,19 @@ const createDoneButton = function (itemId) {
     });
 }
 
-const createEditButton = function (modalHTMLId, itemName, itemId) {
+//edit button opens up modal
+const createEditButton = function (modalHTMLId, itemName, itemId, itemInfo) {
   return $(`<button type="button" class="edit-button" data-toggle="modal" data-target="${modalHTMLId}">`)
     .text('Edit')
     .click(() => {
-      $(`${modalHTMLId} .item-name`).val(itemName)
       $(`${modalHTMLId} .item-id`).val(itemId);
+      $(`${modalHTMLId} .item-name`).val(itemName);
+      $(`${modalHTMLId} .item-info`).val(itemInfo);
       console.log(`Edit button clicked for ${modalHTMLId} ${itemId}`)
     });
 }
 
+//divider line between category items - unless single or last item
 const createDivider = function (itemId, itemsCount) {
   if (itemsCount <= itemId + 1) {
     return;
@@ -42,6 +46,8 @@ const createCategoryDisplay = function (queryResult, category) {
   categoryContainer.append(`<h2>${catTitle}</h2>`);
   categoryContainer.append(itemCounter);
   let itemId = 0;
+
+  //build each item inside category
   for (const obj of queryResult) {
     const item = $(`<article id="${catTitle.slice(0, -1)}-${itemId}">`);
     const myId = `#${catTitle.slice(0, -1)}` + `${itemId}`;
@@ -52,15 +58,18 @@ const createCategoryDisplay = function (queryResult, category) {
     const title = $('<h3>').text(`${obj.title || obj.name}`);
     const buttonsContainer = $('<div class="buttons">');
     const rating = $('<h5>').text(`Rating: ${obj.rating}`);
-    const synopsis = obj.synopsis ? $('<p>').text(`${obj.synopsis}`) : null;
-    const address = obj.city ? $('<p>').text(`${obj.street}, ${obj.city}, ${obj.province}, ${obj.post_code}, ${obj.country}`) : null;
-    const price = obj. price ? $('<p>').text(`Price: $${obj.price / 100}`) : null;
-
-    //for now only applies class, need to put in state+db
+    let info;
+    if (obj.synopsis) {
+      info = $('<p>').text(`${obj.synopsis}`);
+    } else if (obj.city) {
+      info = $('<p>').text(`${obj.street}, ${obj.city}, ${obj.province}, ${obj.post_code}, ${obj.country}`);
+    } else if (obj.price) {
+      info = $('<p>').text(`Price: $${obj.price / 100}`);
+    } else {
+      info = $('<p>').text('No additional information provided');
+    }
     const doneButton = createDoneButton(myId);
-    //figure out the modals
-    const editButton = createEditButton("#moviesModal", obj.title, id);
-    //divider line between category items - unless single or last item
+    const editButton = createEditButton(`#${catTitle}Modal`, obj.title || obj.name, id, info.text());
     const divider = createDivider(itemId, itemsCount);
 
     //put all HTML elements together
@@ -70,9 +79,7 @@ const createCategoryDisplay = function (queryResult, category) {
     header.append(buttonsContainer);
     item.append(header);
     item.append(rating);
-    if (synopsis) item.append(synopsis);
-    if (address) item.append(address);
-    if (price) item.append(price);
+    item.append(info)
     item.append(divider);
     categoryContainer.append(item);
     itemId++;
@@ -82,7 +89,6 @@ const createCategoryDisplay = function (queryResult, category) {
 
 //loads all existing content for specific user
 const loadCategory = function (category) {
-  console.log('AJAX call, loading category', category);
   //makes a request to the /category route, gets back an array of arrays
   $.ajax('/category', { method: 'GET' })
     .then(res => {
@@ -98,7 +104,6 @@ const loadCategory = function (category) {
       $(`${category}`).append(createCategoryDisplay(catArrays[`${category}`], `${category}`));
     })
     .catch(err => console.log(err))
-    .always(() => console.log('Ajax call successful'));
 };
 
 
@@ -115,28 +120,14 @@ const toggleCategoryDisplay = function (category) {
 }
 
 //functions to display specific category on nav bar click
-const showMovies = function () {
-  toggleCategoryDisplay('.movies');
-  loadCategory('.movies');
-};
-
-const showRestaurants = function () {
-  toggleCategoryDisplay('.restaurants');
-  loadCategory('.restaurants');
-};
-
-const showBooks = function () {
-  toggleCategoryDisplay('.books');
-  loadCategory('.books');
-};
-
-const showProducts = function () {
-  toggleCategoryDisplay('.products');
-  loadCategory('.products');
-};
+const showCategory = function (category) {
+  toggleCategoryDisplay(category);
+  loadCategory(category);
+}
 
 //get user input from modal form
 const getUserInput = function (modalHTMLId) {
+console.log('modalHTMLId :', modalHTMLId);
   const formInput = $(`${modalHTMLId} .modalInput`).serializeArray();
   console.log('formInput :', formInput);
   const id = formInput[0].value;

@@ -36,9 +36,13 @@
   color: #001524;
 }
 
-.navbar-light .dropdown-menu .dropdown-item:hover {
+.navbar-light .dropdown-menu .dropdown-item:hover, .navbar-light .dropdown-menu .dropdown-item:active, .navbar-light .dropdown-menu .dropdown-item:focus {
   background-color: rgba(0, 0, 0, 0.4);
   color: #001524;
+}
+
+.navbar-light .dropdown-menu .dropdown-item:focus-visible {
+  outline: none;
 }
 
 .navbar-light .logout {

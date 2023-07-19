@@ -1,6 +1,6 @@
 const express = require('express');
 const cookieSession = require('cookie-session');
-const router  = express.Router();
+const router = express.Router();
 const {
   searchMovie,
   searchProduct,
@@ -190,173 +190,39 @@ module.exports = (db) => {
       .catch(e => res.send(`Error: ${e}`));
   }
 
-  //edit specific movie
-  router.post("/movies/:id", (req, res) => {
-
-    const {id, name, category} = req.body;
-
-    // deleteMovieFromDb(id);
-
-    //req params gets id from link
-    const search = req.body.name;
-    console.log(req.params);
-    const categoryChange = req.body.category.toLowerCase();
-    const userId = req.session.user_id;
-    const templateVars = { user: userId };
-
-    switch (categoryChange) {
-    case ("movies"):
-      // search for the movie through an api
-      searchMovie(search)
-        .then(movieJSON => {
-        // Extract required parameters from API to user's search
-          const description = JSON.parse(movieJSON);
-          let { title, plot, rating } = description;
-          rating = Number(rating);
-          const data = { title, plot, rating};
-          // Check if the API returns a title, plot and rating
-          if (data.title && data.plot && data.rating) {
-          // Query to add the search to the database
-            addToMovieDatabase(data)
-              .then(() => {
-              // Gets the table length to use as the new movies_id
-                getCategoryLength("movies")
-                  .then(count => {
-                    const movieId = Number(count);
-                    // Adds the users.id and movies.id to the many to many table
-                    addToUsersAndCategoriesDatabase(["movies", "movie_id"], movieId)
-                    // .then(() => {
-                    //   deleteCategoryItem(["movies", "movie_id"], movieId)
-                    //     .then(() => res.redirect("/"))
-                    //     .catch((e) => res.send(`Delete from category error: ${e}`));
-                    // })
-                    .catch(e => res.send(`Many to many table error`));
-                  })
-                  .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
-              })
-              .catch(e => res.send("Invalid movie, try again"));
-          } else {
-            return res.status(400).send("Cannot add item, try a different search!");
-          }
-        });
-      break;
-    case ("books"):
-      // searches for book through an api
-      searchBook(search)
-        .then(bookJSON => {
-          const result = JSON.parse(bookJSON);
-          const description = result.products[0];
-          const title = description.title;
-          const rating = description.reviews.rating;
-          const author = "Author";
-          const synopsis = "API does not provide a synopsis.";
-          const data = { title, author, rating, synopsis };
-
-          if (data) {
-          // adds search to book database
-            addToBookDatabase(data)
-              .then(() => {
-              // Gets the table length to use as the new book_id
-                getCategoryLength("books")
-                  .then(count => {
-                    const bookId = Number(count);
-                    // Adds the users.id and products.id to the many to many table
-                    addToUsersAndCategoriesDatabase(["books", "book_id"], userId, bookId)
-                    .then(() => res.redirect("/"))
-                    .catch(e => res.send(`Many to many table error`));
-                  })
-                  .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
-              })
-              .catch(e => res.send("Invalid book, try again"));
-          } else {
-            return res.status(400).send("Cannot add item, try a different search!");
-          }
-        });
-      break;
-    case ("restaurants"):
-      // fetch ip of user
-      fetchMyIP()
-        .then(body => {
-        // fetch longitude and latitude of user
-          fetchCoordsByIP(body)
-            .then(coordinates => {
-              const { lat, lon } = JSON.parse(coordinates);
-              const coords = { lat, lon };
-              // search for restaurant near user using an api
-              // API not configured to search for restaurants with multiple words
-              searchRestaurant(search, coords)
-                .then(restaurantJSON => {
-                  const result = JSON.parse(restaurantJSON).restaurants[0].restaurant;
-                  // console.log(result);
-                  const data = {
-                    name: result.name,
-                    street: result.location.address,
-                    //city: result.location.city,
-                    //post_code: result.location.zipcode,
-                    city: '',
-                    post_code: '',
-                    rating: result.user_rating.aggregate_rating,
-                    country: '',
-                    province: ''
-                  };
-
-                  if (data) {
-                  // add user's search to database
-                    addToRestaurantDatabase(data)
-                      .then(() => {
-                      // Gets the table length to use as the new restaurant_id
-                        getCategoryLength("restaurants")
-                          .then(count => {
-                            const restaurantId = Number(count);
-                            // Adds the users.id and restaurant.id to the many to many table
-                            addToUsersAndCategoriesDatabase(["restaurants", "restaurant_id"], userId, restaurantId)
-                              .then(() => res.redirect("/"))
-                              .catch(e => res.send(`Many to many table error`));
-                          })
-                          .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
-                      })
-                      .catch(e => res.send("Invalid restaurant, try again"));
-                  } else {
-                    return res.status(400).send("Cannot add item, try a different search!");
-                  }
-
-                });
-            });
-        });
-      break;
-    case ("products"):
-      // search for the product through an api
-      searchProduct(search)
-        .then(productJSON => {
-          const results = JSON.parse(productJSON);
-          // extract the first product
-          const description = results.products[0];
-          const title = description.title;
-          const price = description.price["current_price"] * 100;
-          const rating = description.reviews.rating;
-          const data = { title, price, rating };
-          // Check if the API returns a title, rating, and price
-          if (data.title && data.price && data.rating) {
-            addToProductDatabase(data)
-              .then(() => {
-              // Gets the table length to use as the new product_id
-                getCategoryLength("products")
-                  .then(count => {
-                    const productId = Number(count);
-                    // Adds the users.id and products.id to the many to many table
-                    addToUsersAndCategoriesDatabase(["products", "product_id"], userId, productId)
-                      .then(() => res.redirect("/"))
-                      .catch(e => res.send(`Many to many table error`));
-                  })
-                  .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
-              })
-              .catch(e => res.send("Invalid product, try again"));
-          } else {
-            return res.status(400).send("Cannot add item, try a different search!");
-          }
-        });
-      break;
+  const updateItem = (table, title, id, info) => {
+    let queryString;
+    
+    if (table == 'movies') {
+      queryString = `
+      UPDATE ${table}
+      SET title='${title}', synopsis='${info}'
+      WHERE id=${id}
+      `;
     }
+    return db.query(queryString)
+      .then(res => res.rowCount)
+      .catch(e => res.send(`Error: ${e}`));
+  };
+
+  //edit specific movie
+  router.post("/", (req, res) => {
+    const table = req.body.category.toLowerCase();
+    const title = req.body.itemName.replace("'", "''");
+    const id = req.body.itemId;
+    const info = req.body.itemInfo;
+    console.log('req.body :', req.body);
+
+    updateItem(table, title, id, info)
+      .then(updatedRows => {
+        if (updatedRows == 1) {
+          res.redirect("/");
+        } else if (updatedRows == 0) {
+          res.send("No updates made");
+        } else {
+          res.send("Check query, multiple updates");
+        }
+      })
   });
 
   //edit specific restaurant
@@ -367,156 +233,156 @@ module.exports = (db) => {
     const templateVars = { user: userId };
 
     switch (categoryChange) {
-    case ("movies"):
-      // search for the movie through an api
-      searchMovie(search)
-        .then(movieJSON => {
-        // Extract required parameters from API to user's search
-          const description = JSON.parse(movieJSON);
-          let { title, plot, rating } = description;
-          rating = Number(rating);
-          const data = { title, plot, rating};
-          // Check if the API returns a title, plot and rating
-          if (data.title && data.plot && data.rating) {
-          // Query to add the search to the database
-            addToMovieDatabase(data)
-              .then(() => {
-              // Gets the table length to use as the new movies_id
-                getCategoryLength("movies")
-                  .then(count => {
-                    console.log("test");
-                    const movieId = Number(count);
-                    console.log("movie id: ", movieId);
-                    console.log("user id: ", userId);
-                    // Adds the users.id and movies.id to the many to many table
-                    addToUsersAndCategoriesDatabase(["movies", "movie_id"], userId, movieId)
-                      .then(() => res.redirect("/"))
-                      .catch(e => res.send(`Many to many table error`));
-                  })
-                  .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
-              })
-              .catch(e => res.send("Invalid movie, try again"));
-          } else {
-            return res.status(400).send("Cannot add item, try a different search!");
-          }
-        });
-      break;
-    case ("books"):
-      // searches for book through an api
-      searchBook(search)
-        .then(bookJSON => {
-          const result = JSON.parse(bookJSON);
-          const description = result.products[0];
-          const title = description.title;
-          const rating = description.reviews.rating;
-          const author = "Author";
-          const synopsis = "API does not provide a synopsis.";
-          const data = { title, author, rating, synopsis };
+      case ("movies"):
+        // search for the movie through an api
+        searchMovie(search)
+          .then(movieJSON => {
+            // Extract required parameters from API to user's search
+            const description = JSON.parse(movieJSON);
+            let { title, plot, rating } = description;
+            rating = Number(rating);
+            const data = { title, plot, rating };
+            // Check if the API returns a title, plot and rating
+            if (data.title && data.plot && data.rating) {
+              // Query to add the search to the database
+              addToMovieDatabase(data)
+                .then(() => {
+                  // Gets the table length to use as the new movies_id
+                  getCategoryLength("movies")
+                    .then(count => {
+                      console.log("test");
+                      const movieId = Number(count);
+                      console.log("movie id: ", movieId);
+                      console.log("user id: ", userId);
+                      // Adds the users.id and movies.id to the many to many table
+                      addToUsersAndCategoriesDatabase(["movies", "movie_id"], userId, movieId)
+                        .then(() => res.redirect("/"))
+                        .catch(e => res.send(`Many to many table error`));
+                    })
+                    .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
+                })
+                .catch(e => res.send("Invalid movie, try again"));
+            } else {
+              return res.status(400).send("Cannot add item, try a different search!");
+            }
+          });
+        break;
+      case ("books"):
+        // searches for book through an api
+        searchBook(search)
+          .then(bookJSON => {
+            const result = JSON.parse(bookJSON);
+            const description = result.products[0];
+            const title = description.title;
+            const rating = description.reviews.rating;
+            const author = "Author";
+            const synopsis = "API does not provide a synopsis.";
+            const data = { title, author, rating, synopsis };
 
-          if (data) {
-          // adds search to book database
-            addToBookDatabase(data)
-              .then(() => {
-              // Gets the table length to use as the new book_id
-                getCategoryLength("books")
-                  .then(count => {
-                    const bookId = Number(count);
-                    // Adds the users.id and products.id to the many to many table
-                    addToUsersAndCategoriesDatabase(["books", "book_id"], userId, bookId)
-                      .then(() => res.redirect("/"))
-                      .catch(e => res.send(`Many to many table error`));
-                  })
-                  .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
-              })
-              .catch(e => res.send("Invalid book, try again"));
-          } else {
-            return res.status(400).send("Cannot add item, try a different search!");
-          }
-        });
-      break;
-    case ("restaurants"):
-      // fetch ip of user
-      fetchMyIP()
-        .then(body => {
-        // fetch longitude and latitude of user
-          fetchCoordsByIP(body)
-            .then(coordinates => {
-              const { lat, lon } = JSON.parse(coordinates);
-              const coords = { lat, lon };
-              // search for restaurant near user using an api
-              // API not configured to search for restaurants with multiple words
-              searchRestaurant(search, coords)
-                .then(restaurantJSON => {
-                  const result = JSON.parse(restaurantJSON).restaurants[0].restaurant;
-                  // console.log(result);
-                  const data = {
-                    name: result.name,
-                    street: result.location.address,
-                    //city: result.location.city,
-                    //post_code: result.location.zipcode,
-                    city: '',
-                    post_code: '',
-                    rating: result.user_rating.aggregate_rating,
-                    country: '',
-                    province: ''
-                  };
+            if (data) {
+              // adds search to book database
+              addToBookDatabase(data)
+                .then(() => {
+                  // Gets the table length to use as the new book_id
+                  getCategoryLength("books")
+                    .then(count => {
+                      const bookId = Number(count);
+                      // Adds the users.id and products.id to the many to many table
+                      addToUsersAndCategoriesDatabase(["books", "book_id"], userId, bookId)
+                        .then(() => res.redirect("/"))
+                        .catch(e => res.send(`Many to many table error`));
+                    })
+                    .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
+                })
+                .catch(e => res.send("Invalid book, try again"));
+            } else {
+              return res.status(400).send("Cannot add item, try a different search!");
+            }
+          });
+        break;
+      case ("restaurants"):
+        // fetch ip of user
+        fetchMyIP()
+          .then(body => {
+            // fetch longitude and latitude of user
+            fetchCoordsByIP(body)
+              .then(coordinates => {
+                const { lat, lon } = JSON.parse(coordinates);
+                const coords = { lat, lon };
+                // search for restaurant near user using an api
+                // API not configured to search for restaurants with multiple words
+                searchRestaurant(search, coords)
+                  .then(restaurantJSON => {
+                    const result = JSON.parse(restaurantJSON).restaurants[0].restaurant;
+                    // console.log(result);
+                    const data = {
+                      name: result.name,
+                      street: result.location.address,
+                      //city: result.location.city,
+                      //post_code: result.location.zipcode,
+                      city: '',
+                      post_code: '',
+                      rating: result.user_rating.aggregate_rating,
+                      country: '',
+                      province: ''
+                    };
 
-                  if (data) {
-                  // add user's search to database
-                    addToRestaurantDatabase(data)
-                      .then(() => {
-                      // Gets the table length to use as the new restaurant_id
-                        getCategoryLength("restaurants")
-                          .then(count => {
-                            const restaurantId = Number(count);
-                            // Adds the users.id and restaurant.id to the many to many table
-                            addToUsersAndCategoriesDatabase(["restaurants", "restaurant_id"], userId, restaurantId)
-                              .then(() => res.redirect("/"))
-                              .catch(e => res.send(`Many to many table error`));
-                          })
-                          .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
-                      })
-                      .catch(e => res.send("Invalid restaurant, try again"));
-                  } else {
-                    return res.status(400).send("Cannot add item, try a different search!");
-                  }
+                    if (data) {
+                      // add user's search to database
+                      addToRestaurantDatabase(data)
+                        .then(() => {
+                          // Gets the table length to use as the new restaurant_id
+                          getCategoryLength("restaurants")
+                            .then(count => {
+                              const restaurantId = Number(count);
+                              // Adds the users.id and restaurant.id to the many to many table
+                              addToUsersAndCategoriesDatabase(["restaurants", "restaurant_id"], userId, restaurantId)
+                                .then(() => res.redirect("/"))
+                                .catch(e => res.send(`Many to many table error`));
+                            })
+                            .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
+                        })
+                        .catch(e => res.send("Invalid restaurant, try again"));
+                    } else {
+                      return res.status(400).send("Cannot add item, try a different search!");
+                    }
 
-                });
-            });
-        });
-      break;
-    case ("products"):
-      // search for the product through an api
-      searchProduct(search)
-        .then(productJSON => {
-          const results = JSON.parse(productJSON);
-          // extract the first product
-          const description = results.products[0];
-          const title = description.title;
-          const price = description.price["current_price"] * 100;
-          const rating = description.reviews.rating;
-          const data = { title, price, rating };
-          // Check if the API returns a title, rating, and price
-          if (data.title && data.price && data.rating) {
-            addToProductDatabase(data)
-              .then(() => {
-              // Gets the table length to use as the new product_id
-                getCategoryLength("products")
-                  .then(count => {
-                    const productId = Number(count);
-                    // Adds the users.id and products.id to the many to many table
-                    addToUsersAndCategoriesDatabase(["products", "product_id"], userId, productId)
-                      .then(() => res.redirect("/"))
-                      .catch(e => res.send(`Many to many table error`));
-                  })
-                  .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
-              })
-              .catch(e => res.send("Invalid product, try again"));
-          } else {
-            return res.status(400).send("Cannot add item, try a different search!");
-          }
-        });
-      break;
+                  });
+              });
+          });
+        break;
+      case ("products"):
+        // search for the product through an api
+        searchProduct(search)
+          .then(productJSON => {
+            const results = JSON.parse(productJSON);
+            // extract the first product
+            const description = results.products[0];
+            const title = description.title;
+            const price = description.price["current_price"] * 100;
+            const rating = description.reviews.rating;
+            const data = { title, price, rating };
+            // Check if the API returns a title, rating, and price
+            if (data.title && data.price && data.rating) {
+              addToProductDatabase(data)
+                .then(() => {
+                  // Gets the table length to use as the new product_id
+                  getCategoryLength("products")
+                    .then(count => {
+                      const productId = Number(count);
+                      // Adds the users.id and products.id to the many to many table
+                      addToUsersAndCategoriesDatabase(["products", "product_id"], userId, productId)
+                        .then(() => res.redirect("/"))
+                        .catch(e => res.send(`Many to many table error`));
+                    })
+                    .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
+                })
+                .catch(e => res.send("Invalid product, try again"));
+            } else {
+              return res.status(400).send("Cannot add item, try a different search!");
+            }
+          });
+        break;
     }
   });
 
@@ -526,153 +392,153 @@ module.exports = (db) => {
     const userId = req.session.user_id;
     const templateVars = { user: userId };
     switch (categoryChange) {
-    case ("movies"):
-      // search for the movie through an api
-      searchMovie(search)
-        .then(movieJSON => {
-        // Extract required parameters from API to user's search
-          const description = JSON.parse(movieJSON);
-          let { title, plot, rating } = description;
-          rating = Number(rating);
-          const data = { title, plot, rating};
-          // Check if the API returns a title, plot and rating
-          if (data.title && data.plot && data.rating) {
-          // Query to add the search to the database
-            addToMovieDatabase(data)
-              .then(() => {
-              // Gets the table length to use as the new movies_id
-                getCategoryLength("movies")
-                  .then(count => {
-                    console.log("test");
-                    const movieId = Number(count);
-                    console.log("movie id: ", movieId);
-                    console.log("user id: ", userId);
-                    // Adds the users.id and movies.id to the many to many table
-                    addToUsersAndCategoriesDatabase(["movies", "movie_id"], userId, movieId)
-                      .then(() => res.redirect("/"))
-                      .catch(e => res.send(`Many to many table error`));
-                  })
-                  .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
-              })
-              .catch(e => res.send("Invalid movie, try again"));
-          } else {
-            return res.status(400).send("Cannot add item, try a different search!");
-          }
-        });
-      break;
-    case ("books"):
-      // searches for book through an api
-      searchBook(search)
-        .then(bookJSON => {
-          const result = JSON.parse(bookJSON);
-          const description = result.products[0];
-          const title = description.title;
-          const rating = description.reviews.rating;
-          const author = "Author";
-          const synopsis = "API does not provide a synopsis.";
-          const data = { title, author, rating, synopsis };
-          if (data) {
-          // adds search to book database
-            addToBookDatabase(data)
-              .then(() => {
-              // Gets the table length to use as the new book_id
-                getCategoryLength("books")
-                  .then(count => {
-                    const bookId = Number(count);
-                    // Adds the users.id and products.id to the many to many table
-                    addToUsersAndCategoriesDatabase(["books", "book_id"], userId, bookId)
-                      .then(() => res.redirect("/"))
-                      .catch(e => res.send(`Many to many table error`));
-                  })
-                  .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
-              })
-              .catch(e => res.send("Invalid book, try again"));
-          } else {
-            return res.status(400).send("Cannot add item, try a different search!");
-          }
-        });
-      break;
-    case ("restaurants"):
-      // fetch ip of user
-      fetchMyIP()
-        .then(body => {
-        // fetch longitude and latitude of user
-          fetchCoordsByIP(body)
-            .then(coordinates => {
-              const { lat, lon } = JSON.parse(coordinates);
-              const coords = { lat, lon };
-              // search for restaurant near user using an api
-              // API not configured to search for restaurants with multiple words
-              searchRestaurant(search, coords)
-                .then(restaurantJSON => {
-                  const result = JSON.parse(restaurantJSON).restaurants[0].restaurant;
-                  // console.log(result);
-                  const data = {
-                    name: result.name,
-                    street: result.location.address,
-                    //city: result.location.city,
-                    //post_code: result.location.zipcode,
-                    city: '',
-                    post_code: '',
-                    rating: result.user_rating.aggregate_rating,
-                    country: '',
-                    province: ''
-                  };
-                  if (data) {
-                  // add user's search to database
-                    addToRestaurantDatabase(data)
-                      .then(() => {
-                      // Gets the table length to use as the new restaurant_id
-                        getCategoryLength("restaurants")
-                          .then(count => {
-                            const restaurantId = Number(count);
-                            // Adds the users.id and restaurant.id to the many to many table
-                            addToUsersAndCategoriesDatabase(["restaurants", "restaurant_id"], userId, restaurantId)
-                              .then(() => res.redirect("/"))
-                              .catch(e => res.send(`Many to many table error`));
-                          })
-                          .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
-                      })
-                      .catch(e => res.send("Invalid restaurant, try again"));
-                  } else {
-                    return res.status(400).send("Cannot add item, try a different search!");
-                  }
-                });
-            });
-        });
-      break;
-    case ("products"):
-      // search for the product through an api
-      searchProduct(search)
-        .then(productJSON => {
-          const results = JSON.parse(productJSON);
-          // extract the first product
-          const description = results.products[0];
-          const title = description.title;
-          const price = description.price["current_price"] * 100;
-          const rating = description.reviews.rating;
-          const data = { title, price, rating };
-          // Check if the API returns a title, rating, and price
-          if (data.title && data.price && data.rating) {
-            addToProductDatabase(data)
-              .then(() => {
-              // Gets the table length to use as the new product_id
-                getCategoryLength("products")
-                  .then(count => {
-                    const productId = Number(count);
-                    // Adds the users.id and products.id to the many to many table
-                    addToUsersAndCategoriesDatabase(["products", "product_id"], userId, productId)
-                      .then(() => res.redirect("/"))
-                      .catch(e => res.send(`Many to many table error`));
-                  })
-                  .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
-              })
-              .catch(e => res.send("Invalid product, try again"));
-          } else {
-            return res.status(400).send("Cannot add item, try a different search!");
-          }
-        });
-      break;
+      case ("movies"):
+        // search for the movie through an api
+        searchMovie(search)
+          .then(movieJSON => {
+            // Extract required parameters from API to user's search
+            const description = JSON.parse(movieJSON);
+            let { title, plot, rating } = description;
+            rating = Number(rating);
+            const data = { title, plot, rating };
+            // Check if the API returns a title, plot and rating
+            if (data.title && data.plot && data.rating) {
+              // Query to add the search to the database
+              addToMovieDatabase(data)
+                .then(() => {
+                  // Gets the table length to use as the new movies_id
+                  getCategoryLength("movies")
+                    .then(count => {
+                      console.log("test");
+                      const movieId = Number(count);
+                      console.log("movie id: ", movieId);
+                      console.log("user id: ", userId);
+                      // Adds the users.id and movies.id to the many to many table
+                      addToUsersAndCategoriesDatabase(["movies", "movie_id"], userId, movieId)
+                        .then(() => res.redirect("/"))
+                        .catch(e => res.send(`Many to many table error`));
+                    })
+                    .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
+                })
+                .catch(e => res.send("Invalid movie, try again"));
+            } else {
+              return res.status(400).send("Cannot add item, try a different search!");
+            }
+          });
+        break;
+      case ("books"):
+        // searches for book through an api
+        searchBook(search)
+          .then(bookJSON => {
+            const result = JSON.parse(bookJSON);
+            const description = result.products[0];
+            const title = description.title;
+            const rating = description.reviews.rating;
+            const author = "Author";
+            const synopsis = "API does not provide a synopsis.";
+            const data = { title, author, rating, synopsis };
+            if (data) {
+              // adds search to book database
+              addToBookDatabase(data)
+                .then(() => {
+                  // Gets the table length to use as the new book_id
+                  getCategoryLength("books")
+                    .then(count => {
+                      const bookId = Number(count);
+                      // Adds the users.id and products.id to the many to many table
+                      addToUsersAndCategoriesDatabase(["books", "book_id"], userId, bookId)
+                        .then(() => res.redirect("/"))
+                        .catch(e => res.send(`Many to many table error`));
+                    })
+                    .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
+                })
+                .catch(e => res.send("Invalid book, try again"));
+            } else {
+              return res.status(400).send("Cannot add item, try a different search!");
+            }
+          });
+        break;
+      case ("restaurants"):
+        // fetch ip of user
+        fetchMyIP()
+          .then(body => {
+            // fetch longitude and latitude of user
+            fetchCoordsByIP(body)
+              .then(coordinates => {
+                const { lat, lon } = JSON.parse(coordinates);
+                const coords = { lat, lon };
+                // search for restaurant near user using an api
+                // API not configured to search for restaurants with multiple words
+                searchRestaurant(search, coords)
+                  .then(restaurantJSON => {
+                    const result = JSON.parse(restaurantJSON).restaurants[0].restaurant;
+                    // console.log(result);
+                    const data = {
+                      name: result.name,
+                      street: result.location.address,
+                      //city: result.location.city,
+                      //post_code: result.location.zipcode,
+                      city: '',
+                      post_code: '',
+                      rating: result.user_rating.aggregate_rating,
+                      country: '',
+                      province: ''
+                    };
+                    if (data) {
+                      // add user's search to database
+                      addToRestaurantDatabase(data)
+                        .then(() => {
+                          // Gets the table length to use as the new restaurant_id
+                          getCategoryLength("restaurants")
+                            .then(count => {
+                              const restaurantId = Number(count);
+                              // Adds the users.id and restaurant.id to the many to many table
+                              addToUsersAndCategoriesDatabase(["restaurants", "restaurant_id"], userId, restaurantId)
+                                .then(() => res.redirect("/"))
+                                .catch(e => res.send(`Many to many table error`));
+                            })
+                            .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
+                        })
+                        .catch(e => res.send("Invalid restaurant, try again"));
+                    } else {
+                      return res.status(400).send("Cannot add item, try a different search!");
+                    }
+                  });
+              });
+          });
+        break;
+      case ("products"):
+        // search for the product through an api
+        searchProduct(search)
+          .then(productJSON => {
+            const results = JSON.parse(productJSON);
+            // extract the first product
+            const description = results.products[0];
+            const title = description.title;
+            const price = description.price["current_price"] * 100;
+            const rating = description.reviews.rating;
+            const data = { title, price, rating };
+            // Check if the API returns a title, rating, and price
+            if (data.title && data.price && data.rating) {
+              addToProductDatabase(data)
+                .then(() => {
+                  // Gets the table length to use as the new product_id
+                  getCategoryLength("products")
+                    .then(count => {
+                      const productId = Number(count);
+                      // Adds the users.id and products.id to the many to many table
+                      addToUsersAndCategoriesDatabase(["products", "product_id"], userId, productId)
+                        .then(() => res.redirect("/"))
+                        .catch(e => res.send(`Many to many table error`));
+                    })
+                    .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
+                })
+                .catch(e => res.send("Invalid product, try again"));
+            } else {
+              return res.status(400).send("Cannot add item, try a different search!");
+            }
+          });
+        break;
     }
   });
 
@@ -684,177 +550,178 @@ module.exports = (db) => {
     const templateVars = { user: userId };
 
     switch (categoryChange) {
-    case ("movies"):
-      // search for the movie through an api
-      searchMovie(search)
-        .then(movieJSON => {
-        // Extract required parameters from API to user's search
-          const description = JSON.parse(movieJSON);
-          let { title, plot, rating } = description;
-          rating = Number(rating);
-          const data = { title, plot, rating};
-          // Check if the API returns a title, plot and rating
-          if (data.title && data.plot && data.rating) {
-          // Query to add the search to the database
-            addToMovieDatabase(data)
-              .then(() => {
-              // Gets the table length to use as the new movies_id
-                getCategoryLength("movies")
-                  .then(count => {
-                    console.log("test");
-                    const movieId = Number(count);
-                    console.log("movie id: ", movieId);
-                    console.log("user id: ", userId);
-                    // Adds the users.id and movies.id to the many to many table
-                    addToUsersAndCategoriesDatabase(["movies", "movie_id"], userId, movieId)
-                      .then(() => res.redirect("/"))
-                      .catch(e => res.send(`Many to many table error`));
-                  })
-                  .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
-              })
-              .catch(e => res.send("Invalid movie, try again"));
-          } else {
-            return res.status(400).send("Cannot add item, try a different search!");
-          }
-        });
-      break;
-    case ("books"):
-      // searches for book through an api
-      searchBook(search)
-        .then(bookJSON => {
-          const result = JSON.parse(bookJSON);
-          const description = result.products[0];
-          const title = description.title;
-          const rating = description.reviews.rating;
-          const author = "Author";
-          const synopsis = "API does not provide a synopsis.";
-          const data = { title, author, rating, synopsis };
+      case ("movies"):
+        // search for the movie through an api
+        searchMovie(search)
+          .then(movieJSON => {
+            // Extract required parameters from API to user's search
+            const description = JSON.parse(movieJSON);
+            let { title, plot, rating } = description;
+            rating = Number(rating);
+            const data = { title, plot, rating };
+            // Check if the API returns a title, plot and rating
+            if (data.title && data.plot && data.rating) {
+              // Query to add the search to the database
+              addToMovieDatabase(data)
+                .then(() => {
+                  // Gets the table length to use as the new movies_id
+                  getCategoryLength("movies")
+                    .then(count => {
+                      console.log("test");
+                      const movieId = Number(count);
+                      console.log("movie id: ", movieId);
+                      console.log("user id: ", userId);
+                      // Adds the users.id and movies.id to the many to many table
+                      addToUsersAndCategoriesDatabase(["movies", "movie_id"], userId, movieId)
+                        .then(() => res.redirect("/"))
+                        .catch(e => res.send(`Many to many table error`));
+                    })
+                    .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
+                })
+                .catch(e => res.send("Invalid movie, try again"));
+            } else {
+              return res.status(400).send("Cannot add item, try a different search!");
+            }
+          });
+        break;
+      case ("books"):
+        // searches for book through an api
+        searchBook(search)
+          .then(bookJSON => {
+            const result = JSON.parse(bookJSON);
+            const description = result.products[0];
+            const title = description.title;
+            const rating = description.reviews.rating;
+            const author = "Author";
+            const synopsis = "API does not provide a synopsis.";
+            const data = { title, author, rating, synopsis };
 
-          if (data) {
-          // adds search to book database
-            addToBookDatabase(data)
-              .then(() => {
-              // Gets the table length to use as the new book_id
-                getCategoryLength("books")
-                  .then(count => {
-                    const bookId = Number(count);
-                    // Adds the users.id and products.id to the many to many table
-                    addToUsersAndCategoriesDatabase(["books", "book_id"], userId, bookId)
-                      .then(() => res.redirect("/"))
-                      .catch(e => res.send(`Many to many table error`));
-                  })
-                  .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
-              })
-              .catch(e => res.send("Invalid book, try again"));
-          } else {
-            return res.status(400).send("Cannot add item, try a different search!");
-          }
-        });
-      break;
-    case ("restaurants"):
-      // fetch ip of user
-      fetchMyIP()
-        .then(body => {
-        // fetch longitude and latitude of user
-          fetchCoordsByIP(body)
-            .then(coordinates => {
-              const { lat, lon } = JSON.parse(coordinates);
-              const coords = { lat, lon };
-              // search for restaurant near user using an api
-              // API not configured to search for restaurants with multiple words
-              searchRestaurant(search, coords)
-                .then(restaurantJSON => {
-                  const result = JSON.parse(restaurantJSON).restaurants[0].restaurant;
-                  // console.log(result);
-                  const data = {
-                    name: result.name,
-                    street: result.location.address,
-                    //city: result.location.city,
-                    //post_code: result.location.zipcode,
-                    city: '',
-                    post_code: '',
-                    rating: result.user_rating.aggregate_rating,
-                    country: '',
-                    province: ''
-                  };
+            if (data) {
+              // adds search to book database
+              addToBookDatabase(data)
+                .then(() => {
+                  // Gets the table length to use as the new book_id
+                  getCategoryLength("books")
+                    .then(count => {
+                      const bookId = Number(count);
+                      // Adds the users.id and products.id to the many to many table
+                      addToUsersAndCategoriesDatabase(["books", "book_id"], userId, bookId)
+                        .then(() => res.redirect("/"))
+                        .catch(e => res.send(`Many to many table error`));
+                    })
+                    .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
+                })
+                .catch(e => res.send("Invalid book, try again"));
+            } else {
+              return res.status(400).send("Cannot add item, try a different search!");
+            }
+          });
+        break;
+      case ("restaurants"):
+        // fetch ip of user
+        fetchMyIP()
+          .then(body => {
+            // fetch longitude and latitude of user
+            fetchCoordsByIP(body)
+              .then(coordinates => {
+                const { lat, lon } = JSON.parse(coordinates);
+                const coords = { lat, lon };
+                // search for restaurant near user using an api
+                // API not configured to search for restaurants with multiple words
+                searchRestaurant(search, coords)
+                  .then(restaurantJSON => {
+                    const result = JSON.parse(restaurantJSON).restaurants[0].restaurant;
+                    // console.log(result);
+                    const data = {
+                      name: result.name,
+                      street: result.location.address,
+                      //city: result.location.city,
+                      //post_code: result.location.zipcode,
+                      city: '',
+                      post_code: '',
+                      rating: result.user_rating.aggregate_rating,
+                      country: '',
+                      province: ''
+                    };
 
-                  if (data) {
-                  // add user's search to database
-                    addToRestaurantDatabase(data)
-                      .then(() => {
-                      // Gets the table length to use as the new restaurant_id
-                        getCategoryLength("restaurants")
-                          .then(count => {
-                            const restaurantId = Number(count);
-                            // Adds the users.id and restaurant.id to the many to many table
-                            addToUsersAndCategoriesDatabase(["restaurants", "restaurant_id"], userId, restaurantId)
-                              .then(() => res.redirect("/"))
-                              .catch(e => res.send(`Many to many table error`));
-                          })
-                          .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
-                      })
-                      .catch(e => res.send("Invalid restaurant, try again"));
-                  } else {
-                    return res.status(400).send("Cannot add item, try a different search!");
-                  }
+                    if (data) {
+                      // add user's search to database
+                      addToRestaurantDatabase(data)
+                        .then(() => {
+                          // Gets the table length to use as the new restaurant_id
+                          getCategoryLength("restaurants")
+                            .then(count => {
+                              const restaurantId = Number(count);
+                              // Adds the users.id and restaurant.id to the many to many table
+                              addToUsersAndCategoriesDatabase(["restaurants", "restaurant_id"], userId, restaurantId)
+                                .then(() => res.redirect("/"))
+                                .catch(e => res.send(`Many to many table error`));
+                            })
+                            .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
+                        })
+                        .catch(e => res.send("Invalid restaurant, try again"));
+                    } else {
+                      return res.status(400).send("Cannot add item, try a different search!");
+                    }
 
-                });
-            });
-        });
-      break;
-    case ("products"):
-      // search for the product through an api
-      searchProduct(search)
-        .then(productJSON => {
-          const results = JSON.parse(productJSON);
-          // extract the first product
-          const description = results.products[0];
-          const title = description.title;
-          const price = description.price["current_price"] * 100;
-          const rating = description.reviews.rating;
-          const data = { title, price, rating };
-          // Check if the API returns a title, rating, and price
-          if (data.title && data.price && data.rating) {
-            addToProductDatabase(data)
-              .then(() => {
-              // Gets the table length to use as the new product_id
-                getCategoryLength("products")
-                  .then(count => {
-                    const productId = Number(count);
-                    // Adds the users.id and products.id to the many to many table
-                    addToUsersAndCategoriesDatabase(["products", "product_id"], userId, productId)
-                      .then(() => res.redirect("/"))
-                      .catch(e => res.send(`Many to many table error`));
-                  })
-                  .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
-              })
-              .catch(e => res.send("Invalid product, try again"));
-          } else {
-            return res.status(400).send("Cannot add item, try a different search!");
-          }
-        });
-      break;
+                  });
+              });
+          });
+        break;
+      case ("products"):
+        // search for the product through an api
+        searchProduct(search)
+          .then(productJSON => {
+            const results = JSON.parse(productJSON);
+            // extract the first product
+            const description = results.products[0];
+            const title = description.title;
+            const price = description.price["current_price"] * 100;
+            const rating = description.reviews.rating;
+            const data = { title, price, rating };
+            // Check if the API returns a title, rating, and price
+            if (data.title && data.price && data.rating) {
+              addToProductDatabase(data)
+                .then(() => {
+                  // Gets the table length to use as the new product_id
+                  getCategoryLength("products")
+                    .then(count => {
+                      const productId = Number(count);
+                      // Adds the users.id and products.id to the many to many table
+                      addToUsersAndCategoriesDatabase(["products", "product_id"], userId, productId)
+                        .then(() => res.redirect("/"))
+                        .catch(e => res.send(`Many to many table error`));
+                    })
+                    .catch(e => res.send(`Error in getCategeoryLength: ${e}`));
+                })
+                .catch(e => res.send("Invalid product, try again"));
+            } else {
+              return res.status(400).send("Cannot add item, try a different search!");
+            }
+          });
+        break;
     }
   });
 
-  const selectItemToDelete = function(tableName) {
+  const selectItemToDelete = function (tableName) {
     return `DELETE FROM ${tableName}
       WHERE id = $1`
   }
 
-  const deleteMovieFromDb = function(id) {
+  const deleteMovieFromDb = function (id) {
     const queryString = selectItemToDelete('movies');
     const values = [id];
     console.log(queryString);
 
     return db.query(queryString, values)
-      .then(res => { console.log('res=', res);
+      .then(res => {
+        console.log('res=', res);
         return res.rows;
       })
       .catch(e => res.send(e));
   }
 
-  const deleteRestaurantFromDb = function(id) {
+  const deleteRestaurantFromDb = function (id) {
     const queryString = selectItemToDelete('restaurants');
     const values = [id];
 
@@ -865,7 +732,7 @@ module.exports = (db) => {
       .catch(e => res.send(e));
   }
 
-  const deleteBookFromDb = function(id) {
+  const deleteBookFromDb = function (id) {
     const queryString = selectItemToDelete('books');
     const values = [id];
 
@@ -875,7 +742,7 @@ module.exports = (db) => {
       })
       .catch(e => res.send(e));
   }
-  const deleteProductFromDb = function(id) {
+  const deleteProductFromDb = function (id) {
     const queryString = selectItemToDelete('products');
     const values = [id];
 

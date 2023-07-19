@@ -15,7 +15,7 @@
   .navbar-nav {
     background: $body-color;
     padding: 0 0.7rem;
-    
+
     .nav-link {
       color: $accent-color !important;
     }
@@ -36,9 +36,15 @@
     background-color: $accent-color;
     color: $text-color;
 
-    .dropdown-item:hover {
-      background-color: $transparent-black;
-      color: $text-color;
+    .dropdown-item {
+      &:hover, &:active, &:focus {
+        background-color: $transparent-black;
+        color: $text-color;
+      }
+
+      &:focus-visible {
+        outline: none;
+      }
     }
   }
 
