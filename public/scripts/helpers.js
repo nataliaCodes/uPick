@@ -15,10 +15,12 @@ const createEditButton = function (modalHTMLId, itemName, itemId, itemInfo) {
   return $(`<button type="button" class="edit-button" data-toggle="modal" data-target="${modalHTMLId}">`)
     .text('Edit')
     .click(() => {
+      //remove $ from price when displaying in modal
+      let itemInfoVal = modalHTMLId == '#productsModal' ? itemInfo.slice(1) : itemInfo;
+      //push values to specific modal
       $(`${modalHTMLId} .item-id`).val(itemId);
       $(`${modalHTMLId} .item-name`).val(itemName);
-      $(`${modalHTMLId} .item-info`).val(itemInfo);
-      console.log(`Edit button clicked for ${modalHTMLId} ${itemId}`)
+      $(`${modalHTMLId} .item-info`).val(itemInfoVal);
     });
 }
 
@@ -64,7 +66,7 @@ const createCategoryDisplay = function (queryResult, category) {
     } else if (obj.city) {
       info = $('<p>').text(`${obj.street}, ${obj.city}, ${obj.province}, ${obj.post_code}, ${obj.country}`);
     } else if (obj.price) {
-      info = $('<p>').text(`Price: $${obj.price / 100}`);
+      info = $('<p>').text(`$${parseFloat(obj.price / 100).toFixed(2)}`);
     } else {
       info = $('<p>').text('No additional information provided');
     }
@@ -124,14 +126,3 @@ const showCategory = function (category) {
   toggleCategoryDisplay(category);
   loadCategory(category);
 }
-
-//get user input from modal form
-const getUserInput = function (modalHTMLId) {
-console.log('modalHTMLId :', modalHTMLId);
-  const formInput = $(`${modalHTMLId} .modalInput`).serializeArray();
-  console.log('formInput :', formInput);
-  const id = formInput[0].value;
-  const name = formInput[1].value;
-  const category = formInput[2].value;
-  return { id, name, category };
-};
