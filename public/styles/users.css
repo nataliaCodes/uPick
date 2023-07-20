@@ -1,19 +1,18 @@
 body {
-  background-color: #32565F !important;
-  background-image: url("/img/fun-backd.png");
-  background-attachment: fixed;
-  color: #001524 !important;
+  background-color: #190033 !important;
+  color: #fbe6fd !important;
   font-family: 'Questrial', sans-serif !important;
 }
 
 body a {
-  color: #001524;
+  color: #fbe6fd;
 }
 
 body > header {
   position: sticky;
   top: 0px;
   left: 0px;
+  z-index: 1;
 }
 
 body p:not(.m-auto) {
@@ -39,7 +38,7 @@ body h3 {
   background-color: transparent;
   margin-top: 8em;
   padding: 5em 10em;
-  border: 1px solid #15616D;
+  border: 1px solid #180027;
   border-radius: 2px;
 }
 
@@ -60,7 +59,6 @@ body h3 {
   flex-direction: row;
   justify-content: flex-start;
   width: 100%;
-  background-color: #c2bc9081;
 }
 
 .main-background .smart-add .smart-add-box {
@@ -75,7 +73,7 @@ body h3 {
   height: 2em;
   width: 14em;
   border-style: hidden;
-  border-bottom: 2px solid #001524;
+  border-bottom: 2px solid #fbe6fd;
   background-color: transparent;
   resize: none;
 }
@@ -86,15 +84,15 @@ body h3 {
 
 .main-background .smart-add .smart-add-box .new-item {
   background-color: transparent;
-  border: 2px solid #001524;
+  border: 2px solid #fbe6fd;
   border-radius: 4px;
   width: 25%;
+  color: #fbe6fd;
 }
 
 .main-background .smart-add .smart-add-box .new-item:hover {
-  background-color: #C2BC90;
-  color: white;
-  border: 2px solid #C2BC90;
+  background-color: #67299d;
+  border: 2px solid #67299d;
 }
 
 .main-background .main-categories {
@@ -105,7 +103,7 @@ body h3 {
   width: 100%;
 }
 
-.main-background .main-categories div {
+.main-background .main-categories div.category {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -113,27 +111,25 @@ body h3 {
   width: 100%;
 }
 
-.main-background .main-categories div h2 {
-  margin-top: 3rem;
+.main-background .main-categories div.category h2 {
   text-transform: capitalize;
 }
 
-.main-background .main-categories div article {
+.main-background .main-categories div.category article {
   width: 90%;
-  margin-bottom: 3rem;
 }
 
-.main-background .main-categories div article .items-count {
+.main-background .main-categories div.category article .items-count {
   text-align: right;
 }
 
-.main-background .main-categories div article header {
+.main-background .main-categories div.category article header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.main-background .main-categories div article .buttons {
+.main-background .main-categories div.category article .buttons {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -141,63 +137,79 @@ body h3 {
   width: 15%;
 }
 
-.main-background .main-categories div article .buttons button {
+.main-background .main-categories div.category article .buttons button {
   margin: 1em;
 }
 
-.main-background .main-categories div:not(.buttons):nth-child(odd) {
-  background-color: rgba(0, 0, 0, 0.4);
-  color: #C2BC90;
-  text-shadow: 5px 5px 5px #001524;
+.main-background .main-categories div.category .section-divider {
+  background-image: url("/img/div1.png");
+  height: 5rem;
+  width: 100%;
 }
 
-.main-background .main-categories div:not(.buttons):nth-child(odd) button {
+.main-background .main-categories div.category .section-divider.top {
+  transform: rotateY(180deg);
+}
+
+.main-background .main-categories div.category .section-divider.bottom {
+  transform: rotateX(180deg);
+}
+
+.main-background .main-categories div.category:nth-child(odd) {
+  background-image: linear-gradient(315deg, #67299d 0%, #df0085eb 50%, #e9a577d6 100%);
+  color: #fbe6fd;
+}
+
+.main-background .main-categories div.category:nth-child(odd) button {
   background-color: transparent;
-  color: #C2BC90;
-  border: 2px solid #C2BC90;
+  color: #fbe6fd;
+  border: 2px solid #fbe6fd;
   border-radius: 4px;
 }
 
-.main-background .main-categories div:not(.buttons):nth-child(odd) button:hover {
-  background-color: #C2BC90;
-  border: 2px solid #C2BC90;
-  color: #001524;
+.main-background .main-categories div.category:nth-child(odd) button:hover {
+  background-color: #ff9b58;
+  border: 2px solid #ff9b58;
+  color: #180027;
 }
 
-.main-background .main-categories div:not(.buttons):nth-child(odd) hr {
-  border-bottom: 1px solid #C2BC90;
+.main-background .main-categories div.category:nth-child(odd) hr {
+  border-bottom: 1px solid #190033;
+  margin: 3rem 0;
 }
 
-.main-background .main-categories div:not(.buttons):nth-child(even) {
-  background-color: #c2bc9081;
-  color: #001524;
-  text-shadow: 5px 5px 5px #C2BC90;
+.main-background .main-categories div.category:nth-child(even) {
+  color: #fbe6fd;
 }
 
-.main-background .main-categories div:not(.buttons):nth-child(even) button {
+.main-background .main-categories div.category:nth-child(even) button {
   background-color: transparent;
-  color: #001524;
-  border: 2px solid #001524;
+  color: #fbe6fd;
+  border: 2px solid #fbe6fd;
   border-radius: 4px;
 }
 
-.main-background .main-categories div:not(.buttons):nth-child(even) button:hover {
-  background-color: #001524;
-  border: 2px solid #001524;
-  color: #C2BC90;
+.main-background .main-categories div.category:nth-child(even) button:hover {
+  background-color: #67299d;
+  border: 2px solid #67299d;
 }
 
-.main-background .main-categories div:not(.buttons):nth-child(even) hr {
-  border-bottom: 1px solid #001524;
+.main-background .main-categories div.category:nth-child(even) hr {
+  border-bottom: 1px solid #67299d;
+  margin: 3rem 0;
+}
+
+.main-background .main-categories div.category:nth-child(even) .section-divider {
+  visibility: hidden;
 }
 
 .main-background .gray-out {
-  color: #C2BC90;
+  color: #67299d;
   font-style: italic;
 }
 
 .main-background .gray-out h3 {
-  color: #C2BC90;
+  color: #67299d;
 }
 
 .main-background .gray-out .buttons {
@@ -209,7 +221,7 @@ div.profile-container {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 2px solid #15616D;
+  border: 2px solid #180027;
   border-radius: 4px;
   width: 55%;
   margin: 2em auto;
@@ -226,7 +238,7 @@ div.profile-container div.user-inputs {
 
 div.profile-container div.user-inputs div.form-group {
   border-radius: 4px;
-  border: 2px solid #15616D;
+  border: 2px solid #180027;
 }
 
 div.profile-container div.user-inputs div.form-group input {
@@ -240,26 +252,26 @@ div.profile-container div.buttons {
 }
 
 div.profile-container div.buttons .btn-submit {
-  background-color: #15616D;
+  background-color: #180027;
   color: white;
-  border: 2px solid #15616D;
+  border: 2px solid #180027;
   border-radius: 4px;
   padding: 0.5em;
 }
 
 div.profile-container div.buttons .btn-submit:hover {
-  border: 2px solid #15616D;
+  border: 2px solid #180027;
   background-color: transparent;
-  color: #15616D;
+  color: #180027;
 }
 
 div.profile-container div.buttons .btn-cancel {
   background-color: transparent;
-  border: 2px solid #15616D;
+  border: 2px solid #180027;
   border-radius: 4px;
 }
 
 div.profile-container div.buttons .btn-cancel:hover {
-  background-color: #15616D;
+  background-color: #180027;
   color: white;
 }
