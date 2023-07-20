@@ -43,16 +43,17 @@ const createCategoryDisplay = function (queryResult, category) {
   };
   const itemCounter = $('<p class="items-count">').text(`${itemsCount} ${itemsCount > 1 ? "items" : "item"}`);
 
-  const catTitle = category.replace(".", "");
+  const categTitle = category.replace(".", "");
 
-  categoryContainer.append(`<h2>${catTitle}</h2>`);
+  categoryContainer.append('<div class="section-divider top"></div>');
+  categoryContainer.append(`<h2>${categTitle}</h2>`);
   categoryContainer.append(itemCounter);
   let itemId = 0;
 
   //build each item inside category
   for (const obj of queryResult) {
-    const item = $(`<article id="${catTitle.slice(0, -1)}-${itemId}">`);
-    const myId = `#${catTitle.slice(0, -1)}` + `${itemId}`;
+    const item = $(`<article id="${categTitle.slice(0, -1)}-${itemId}">`);
+    const myId = `#${categTitle.slice(0, -1)}` + `${itemId}`;
     //needed to communicate to back-end
     const id = obj.id;
     //create elements of category item
@@ -71,7 +72,7 @@ const createCategoryDisplay = function (queryResult, category) {
       info = $('<p>').text('No additional information provided');
     }
     const doneButton = createDoneButton(myId);
-    const editButton = createEditButton(`#${catTitle}Modal`, obj.title || obj.name, id, info.text());
+    const editButton = createEditButton(`#${categTitle}Modal`, obj.title || obj.name, id, info.text());
     const divider = createDivider(itemId, itemsCount);
 
     //put all HTML elements together
@@ -84,6 +85,7 @@ const createCategoryDisplay = function (queryResult, category) {
     item.append(info)
     item.append(divider);
     categoryContainer.append(item);
+    if (queryResult.indexOf(obj) == queryResult.length-1) categoryContainer.append('<div class="section-divider bottom"></div>');
     itemId++;
   }
   return categoryContainer;

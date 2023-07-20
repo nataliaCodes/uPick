@@ -1,44 +1,46 @@
 .navbar-light {
   font-size: 1.5em;
-  color: #C2BC90 !important;
-  background: #32565F url("/img/fun-backd.png");
+  color: #fbe6fd !important;
+  background-image: linear-gradient(315deg, #67299d 0%, #df0086 50%, #ff9b58 100%);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 
 .navbar-light .navbar-brand {
   font-size: xx-large;
-  color: #C2BC90 !important;
-  background: #32565F;
+  color: #180027 !important;
   padding: 0 0.7rem;
 }
 
 .navbar-light .navbar-nav {
-  background: #32565F;
   padding: 0 0.7rem;
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color: #C2BC90 !important;
+  color: #fbe6fd !important;
 }
 
 .navbar-light .collapse button {
-  background-color: #001524;
-  color: #C2BC90;
+  background-color: #190033;
+  color: #fbe6fd;
   font-weight: bold;
 }
 
 .navbar-light .collapse button:hover {
-  background-color: #C2BC90;
-  color: #001524;
+  background-color: #67299d;
+  color: #fbe6fd;
 }
 
 .navbar-light .dropdown-menu {
-  background-color: #C2BC90;
-  color: #001524;
+  background-color: #67299d;
+  color: #fbe6fd;
+}
+
+.navbar-light .dropdown-menu .dropdown-item {
+  color: #fbe6fd;
 }
 
 .navbar-light .dropdown-menu .dropdown-item:hover, .navbar-light .dropdown-menu .dropdown-item:active, .navbar-light .dropdown-menu .dropdown-item:focus {
   background-color: rgba(0, 0, 0, 0.4);
-  color: #001524;
 }
 
 .navbar-light .dropdown-menu .dropdown-item:focus-visible {
@@ -52,14 +54,14 @@
 
 .navbar-light #btn-logout {
   background-color: transparent;
-  border: 2px solid #C2BC90;
+  border: 2px solid #fbe6fd;
   border-radius: 4px;
   font-size: smaller;
-  color: #C2BC90;
+  color: #fbe6fd;
 }
 
 .navbar-light #btn-logout:hover {
-  background-color: #C2BC90;
+  background-color: #ff9b58;
   border: transparent;
-  color: #001524;
+  color: #180027;
 }

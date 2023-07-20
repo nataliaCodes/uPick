@@ -2,19 +2,18 @@
 
 body {
   background-color: $body-color !important;
-  background-image: url('/img/fun-backd.png');
-  background-attachment: fixed;
-  color: $text-color !important;
+  color: $light-text !important;
   font-family: 'Questrial', sans-serif !important;
 
   a {
-    color: $text-color;
+    color: $light-text;
   }
 
   >header {
     position: sticky;
     top: 0px;
     left: 0px;
+    z-index: 1;
   }
 
   p:not(.m-auto) {
@@ -40,7 +39,7 @@ body {
     background-color: transparent;
     margin-top: 8em;
     padding: 5em 10em;
-    border: 1px solid $nav-color;
+    border: 1px solid $dark-text;
     border-radius: 2px;
 
     h1 {
@@ -62,7 +61,6 @@ body {
     justify-content: flex-start;
 
     width: 100%;
-    background-color: $transparent-accent;
 
     .smart-add-box {
       display: flex;
@@ -76,7 +74,7 @@ body {
         height: 2em;
         width: 14em;
         border-style: hidden;
-        border-bottom: 2px solid $text-color;
+        border-bottom: 2px solid $light-text;
         background-color: transparent;
         resize: none;
 
@@ -87,14 +85,14 @@ body {
 
       .new-item {
         background-color: transparent;
-        border: 2px solid $text-color;
+        border: 2px solid $light-text;
         border-radius: 4px;
         width: 25%;
+        color: $light-text;
 
         &:hover {
-          background-color: $accent-color;
-          color: white;
-          border: 2px solid $accent-color;
+          background-color: $purple-accent;
+          border: 2px solid $purple-accent;
         }
       }
     }
@@ -108,22 +106,21 @@ body {
 
     width: 100%;
 
-    div {
+    div.category {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
 
       width: 100%;
+      
 
       h2 {
-        margin-top: 3rem;
         text-transform: capitalize;
       }
 
       article {
         width: 90%;
-        margin-bottom: 3rem;
 
         .items-count {
           text-align: right;
@@ -148,61 +145,77 @@ body {
           }
         }
       }
-    }
 
-    div:not(.buttons):nth-child(odd) {
-      background-color: $transparent-black;
-      color: $accent-color;
-      text-shadow: 5px 5px 5px $text-color;
+      .section-divider {
+        background-image: url('/img/div1.png');
+        height: 5rem;
+        width: 100%;
+    
+        &.top {
+          transform: rotateY(180deg);
+        }
 
-      button {
-        background-color: transparent;
-        color: $accent-color;
-        border: 2px solid $accent-color;
-        border-radius: 4px;
-
-        &:hover {
-          background-color: $accent-color;
-          border: 2px solid $accent-color;
-          color: $text-color;
+        &.bottom {
+          transform: rotateX(180deg);
         }
       }
 
-      hr {
-        border-bottom: 1px solid $accent-color;
-      }
-    }
+      &:nth-child(odd) {
+        background-image: linear-gradient(315deg, #67299d 0%, #df0085eb 50%, #e9a577d6 100%);
+        color: $light-text;
 
-    div:not(.buttons):nth-child(even) {
-      background-color: $transparent-accent;
-      color: $text-color;
-      text-shadow: 5px 5px 5px $accent-color;
+        button {
+          background-color: transparent;
+          color: $light-text;
+          border: 2px solid $light-text;
+          border-radius: 4px;
 
-      button {
-        background-color: transparent;
-        color: $text-color;
-        border: 2px solid $text-color;
-        border-radius: 4px;
+          &:hover {
+            background-color: $orange-accent;
+            border: 2px solid $orange-accent;
+            color: $dark-text;
+          }
+        }
 
-        &:hover {
-          background-color: $text-color;
-          border: 2px solid $text-color;
-          color: $accent-color;
+        hr {
+          border-bottom: 1px solid $body-color;
+          margin: 3rem 0;
         }
       }
 
-      hr {
-        border-bottom: 1px solid $text-color;
+      &:nth-child(even) {
+        color: $light-text;
+
+        button {
+          background-color: transparent;
+          color: $light-text;
+          border: 2px solid $light-text;
+          border-radius: 4px;
+
+          &:hover {
+            background-color: $purple-accent;
+            border: 2px solid $purple-accent;
+          }
+        }
+
+        hr {
+          border-bottom: 1px solid $purple-accent;
+          margin: 3rem 0;
+        }
+
+        .section-divider {
+          visibility: hidden;
+        }
       }
     }
   }
 
   .gray-out {
-    color: $accent-color;
+    color: $purple-accent;
     font-style: italic;
 
     h3 {
-      color: $accent-color;
+      color: $purple-accent;
     }
 
     .buttons {

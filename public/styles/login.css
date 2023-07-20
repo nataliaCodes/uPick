@@ -1,12 +1,31 @@
 body {
-  background-color: #548f9e !important;
-  background-image: url("/img/fun-backd.png");
-  color: #001524 !important;
+  background-color: #190033 !important;
+  color: #fbe6fd !important;
   font-family: 'Questrial', sans-serif !important;
 }
 
 body a {
-  color: #001524;
+  color: #fbe6fd;
+}
+
+body > header {
+  position: sticky;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+}
+
+body p:not(.m-auto) {
+  font-size: larger;
+}
+
+body h5 {
+  font-size: 1.5rem;
+}
+
+body h3 {
+  font-size: 2rem;
+  width: 85%;
 }
 
 .main-background {
@@ -19,7 +38,7 @@ body a {
   background-color: transparent;
   margin-top: 8em;
   padding: 5em 10em;
-  border: 1px solid #15616D;
+  border: 1px solid #180027;
   border-radius: 2px;
 }
 
@@ -39,46 +58,41 @@ body a {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  width: 90%;
-  margin-top: 15px;
-  background-color: transparent;
-  margin-top: 30px;
-  margin-bottom: 20px;
+  width: 100%;
 }
 
 .main-background .smart-add .smart-add-box {
   display: flex;
   flex-direction: column;
   width: 14em;
-  margin-top: 10px;
-  margin-bottom: 20px;
+  margin: 2em 0;
+  margin-left: 5%;
 }
 
 .main-background .smart-add .smart-add-box textarea {
   height: 2em;
   width: 14em;
   border-style: hidden;
-  border-bottom: 2px solid #15616D;
+  border-bottom: 2px solid #fbe6fd;
   background-color: transparent;
   resize: none;
 }
 
 .main-background .smart-add .smart-add-box textarea:focus-visible {
-  border-style: hidden;
-  border-bottom: 2px solid #15616D;
+  outline: none;
 }
 
 .main-background .smart-add .smart-add-box .new-item {
   background-color: transparent;
-  border: 2px solid #15616D;
+  border: 2px solid #fbe6fd;
   border-radius: 4px;
   width: 25%;
+  color: #fbe6fd;
 }
 
 .main-background .smart-add .smart-add-box .new-item:hover {
-  background-color: #D53E20;
-  color: white;
-  border: 2px solid #D53E20;
+  background-color: #67299d;
+  border: 2px solid #67299d;
 }
 
 .main-background .main-categories {
@@ -89,7 +103,7 @@ body a {
   width: 100%;
 }
 
-.main-background .main-categories div {
+.main-background .main-categories div.category {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -97,73 +111,105 @@ body a {
   width: 100%;
 }
 
-.main-background .main-categories div h2 {
-  margin-top: 3rem;
+.main-background .main-categories div.category h2 {
+  text-transform: capitalize;
 }
 
-.main-background .main-categories div article {
+.main-background .main-categories div.category article {
   width: 90%;
-  margin-bottom: 3rem;
 }
 
-.main-background .main-categories div article .items-count {
+.main-background .main-categories div.category article .items-count {
   text-align: right;
 }
 
-.main-background .main-categories div article header {
+.main-background .main-categories div.category article header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.main-background .main-categories div article .buttons {
+.main-background .main-categories div.category article .buttons {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
+  width: 15%;
 }
 
-.main-background .main-categories div article .buttons button {
+.main-background .main-categories div.category article .buttons button {
   margin: 1em;
+}
+
+.main-background .main-categories div.category .section-divider {
+  background-image: url("/img/div.png");
+  height: 5rem;
+  width: 100%;
+}
+
+.main-background .main-categories div.category .section-divider.top {
+  transform: rotate(180deg);
+}
+
+.main-background .main-categories div.category:nth-child(odd) {
+  background-image: linear-gradient(315deg, #67299d 0%, #df0085eb 50%, #e9a577d6 100%);
+  color: #fbe6fd;
+}
+
+.main-background .main-categories div.category:nth-child(odd) button {
   background-color: transparent;
-  color: #001524;
-  border: 2px solid #001524;
+  color: #fbe6fd;
+  border: 2px solid #fbe6fd;
   border-radius: 4px;
 }
 
-.main-background .main-categories div article .buttons button:hover {
-  background-color: #D53E20;
-  color: white;
-  border: 2px solid #D53E20;
+.main-background .main-categories div.category:nth-child(odd) button:hover {
+  background-color: #ff9b58;
+  border: 2px solid #ff9b58;
+  color: #180027;
 }
 
-.main-background .main-categories div article hr {
-  border-bottom: 1px solid #001524;
+.main-background .main-categories div.category:nth-child(odd) hr {
+  border-bottom: 1px solid #190033;
+  margin: 3rem 0;
 }
 
-.main-background .main-categories .category-movies {
-  background-color: #3B60E4;
+.main-background .main-categories div.category:nth-child(even) {
+  color: #fbe6fd;
 }
 
-.main-background .main-categories .category-restaurants {
-  background-color: #FF37A6;
+.main-background .main-categories div.category:nth-child(even) button {
+  background-color: transparent;
+  color: #fbe6fd;
+  border: 2px solid #fbe6fd;
+  border-radius: 4px;
 }
 
-.main-background .main-categories .category-books {
-  background-color: #A3E7FC;
+.main-background .main-categories div.category:nth-child(even) button:hover {
+  background-color: #67299d;
+  border: 2px solid #67299d;
 }
 
-.main-background .main-categories .category-products {
-  background-color: #70EB8D;
+.main-background .main-categories div.category:nth-child(even) hr {
+  border-bottom: 1px solid #67299d;
+  margin: 3rem 0;
+}
+
+.main-background .main-categories div.category:nth-child(even) .top-divider {
+  visibility: hidden;
+}
+
+.main-background .main-categories div.category:nth-child(even) .bottom-divider {
+  visibility: hidden;
 }
 
 .main-background .gray-out {
-  color: #FF7D00;
+  color: #67299d;
   font-style: italic;
 }
 
 .main-background .gray-out h3 {
-  color: #FF7D00;
+  color: #67299d;
 }
 
 .main-background .gray-out .buttons {
@@ -174,7 +220,7 @@ body a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid #15616D;
+  border: 1px solid #180027;
   border-radius: 2px;
   margin: 5em auto;
   width: 30em;
@@ -197,19 +243,19 @@ body a {
 .login-background .main-login .email-password-container form input {
   background-color: transparent;
   border-style: hidden;
-  border-bottom: 2px solid #15616D;
+  border-bottom: 2px solid #180027;
 }
 
 .login-background .main-login .email-password-container form .login-submit {
   margin-top: 15px;
   background-color: transparent;
-  border: 2px solid #15616D;
+  border: 2px solid #180027;
   border-radius: 4px;
   width: 50%;
 }
 
 .login-background .main-login .email-password-container form .login-submit:hover {
-  background-color: #15616D;
+  background-color: #180027;
   color: white;
 }
 
