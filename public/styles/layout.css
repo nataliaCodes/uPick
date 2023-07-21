@@ -25,7 +25,7 @@ body h5 {
 
 body h3 {
   font-size: 2rem;
-  width: 85%;
+  margin-bottom: 0;
 }
 
 .main-background {
@@ -44,6 +44,10 @@ body h3 {
 
 .main-background .jumbotron h1 {
   text-align: center;
+}
+
+.main-background .modal-notify {
+  color: #180027;
 }
 
 .main-background .modal-notify .modal-header {
@@ -129,7 +133,20 @@ body h3 {
   align-items: center;
 }
 
-.main-background .main-categories div.category article .buttons {
+.main-background .main-categories div.category article header .header-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 85%;
+}
+
+.main-background .main-categories div.category article header .header-left .badge {
+  margin-left: 1rem;
+  font-size: medium;
+}
+
+.main-background .main-categories div.category article header .buttons {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -137,8 +154,14 @@ body h3 {
   width: 15%;
 }
 
-.main-background .main-categories div.category article .buttons button {
+.main-background .main-categories div.category article header .buttons button {
   margin: 1em;
+}
+
+.main-background .main-categories div.category article.done h3,
+.main-background .main-categories div.category article.done h5,
+.main-background .main-categories div.category article.done p {
+  font-style: italic;
 }
 
 .main-background .main-categories div.category .section-divider {
@@ -167,7 +190,7 @@ body h3 {
   border-radius: 4px;
 }
 
-.main-background .main-categories div.category:nth-child(odd) button:hover {
+.main-background .main-categories div.category:nth-child(odd) button:hover:not(:disabled) {
   background-color: #ff9b58;
   border: 2px solid #ff9b58;
   color: #180027;
@@ -176,6 +199,10 @@ body h3 {
 .main-background .main-categories div.category:nth-child(odd) hr {
   border-bottom: 1px solid #190033;
   margin: 3rem 0;
+}
+
+.main-background .main-categories div.category:nth-child(odd) .badge.done {
+  background-color: #67299d;
 }
 
 .main-background .main-categories div.category:nth-child(even) {
@@ -189,7 +216,7 @@ body h3 {
   border-radius: 4px;
 }
 
-.main-background .main-categories div.category:nth-child(even) button:hover {
+.main-background .main-categories div.category:nth-child(even) button:hover:not(:disabled) {
   background-color: #67299d;
   border: 2px solid #67299d;
 }
@@ -197,6 +224,10 @@ body h3 {
 .main-background .main-categories div.category:nth-child(even) hr {
   border-bottom: 1px solid #67299d;
   margin: 3rem 0;
+}
+
+.main-background .main-categories div.category:nth-child(even) .badge.done {
+  background-color: #67299d;
 }
 
 .main-background .main-categories div.category:nth-child(even) .section-divider {

@@ -26,7 +26,7 @@ body {
 
   h3 {
     font-size: 2rem;
-    width: 85%;
+    margin-bottom: 0;
   }
 }
 
@@ -47,12 +47,16 @@ body {
     }
   }
 
-  .modal-notify .modal-header {
-    border-radius: 3px 3px 0 0;
-  }
+  .modal-notify {
+    color: $dark-text;
 
-  .modal-notify .modal-content {
-    border-radius: 3px;
+    .modal-header {
+      border-radius: 3px 3px 0 0;
+    }
+
+    .modal-content {
+      border-radius: 3px;
+    }
   }
 
   .smart-add {
@@ -113,7 +117,7 @@ body {
       align-items: center;
 
       width: 100%;
-      
+
 
       h2 {
         text-transform: capitalize;
@@ -130,18 +134,40 @@ body {
           display: flex;
           justify-content: space-between;
           align-items: center;
+
+          .header-left {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+
+            width: 85%;
+
+            .badge {
+              margin-left: 1rem;
+              font-size: medium;
+            }
+          }
+
+          .buttons {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+
+            width: 15%;
+
+            button {
+              margin: 1em;
+            }
+          }
         }
 
-        .buttons {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: flex-end;
-
-          width: 15%;
-
-          button {
-            margin: 1em;
+        &.done {
+          h3,
+          h5,
+          p {
+            font-style: italic;
           }
         }
       }
@@ -150,7 +176,7 @@ body {
         background-image: url('/img/div1.png');
         height: 5rem;
         width: 100%;
-    
+
         &.top {
           transform: rotateY(180deg);
         }
@@ -170,7 +196,7 @@ body {
           border: 2px solid $light-text;
           border-radius: 4px;
 
-          &:hover {
+          &:hover:not(:disabled) {
             background-color: $orange-accent;
             border: 2px solid $orange-accent;
             color: $dark-text;
@@ -180,6 +206,10 @@ body {
         hr {
           border-bottom: 1px solid $body-color;
           margin: 3rem 0;
+        }
+
+        .badge.done {
+          background-color: $purple-accent;
         }
       }
 
@@ -192,7 +222,7 @@ body {
           border: 2px solid $light-text;
           border-radius: 4px;
 
-          &:hover {
+          &:hover:not(:disabled) {
             background-color: $purple-accent;
             border: 2px solid $purple-accent;
           }
@@ -201,6 +231,10 @@ body {
         hr {
           border-bottom: 1px solid $purple-accent;
           margin: 3rem 0;
+        }
+
+        .badge.done {
+          background-color: $purple-accent;
         }
 
         .section-divider {

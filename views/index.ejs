@@ -71,14 +71,12 @@
                 <div class="modal-body">
                   <form class="modalInput" action="/category" method="POST">
                     <input type="hidden" class="item-id" name="itemId">
-                    <input type="hidden" class="category" value="Movies" placeholder="Category" name="category">
-                    <div class="md-form mb-5">
-                      <input type="text" class="item-name form-control validate form-control-lg"
-                        placeholder="Movie title" name="itemName">
+                    <input type="hidden" class="category" placeholder="Category" name="category">
+                    <div class="md-form mb-4">
+                      <input type="text" class="item-name form-control validate form-control-lg" placeholder="Movie title" name="itemName">
                     </div>
-                    <div class="md-form mb-5">
-                      <textarea type="text" class="item-info form-control validate form-control-lg"
-                        placeholder="Synopsis" name="itemInfo"></textarea>
+                    <div class="md-form mb-4">
+                      <textarea type="text" class="item-info form-control validate form-control-lg" placeholder="Synopsis" name="itemInfo" rows="5"></textarea>
                     </div>
                     <!--Footer-->
                     <div class="modal-footer justify-content-center">

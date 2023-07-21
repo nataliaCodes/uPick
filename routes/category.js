@@ -13,11 +13,15 @@ module.exports = (db) => {
   //queries db for all movies of given user
   const selectUserMovies = (userId) => {
     const queryString = `
-    SELECT movies.id, movies.title, movies.rating, movies.synopsis
-    FROM users
-    JOIN users_movies ON users_movies.user_id = users.id
-    JOIN movies ON users_movies.movie_id = movies.id
-    WHERE users.id = $1
+      SELECT movies.id, 
+            movies.title, 
+            movies.rating, 
+            movies.synopsis, 
+            users_movies.is_done
+      FROM users
+      JOIN users_movies ON users_movies.user_id = users.id
+      JOIN movies ON users_movies.movie_id = movies.id
+      WHERE users.id = $1
     `;
     const values = [userId];
     return db.query(queryString, values)
@@ -31,11 +35,19 @@ module.exports = (db) => {
   //queries db for all restaurants of given user
   const selectUserRestaurants = (userId) => {
     const queryString = `
-    SELECT restaurants.id, restaurants.name, restaurants.rating, restaurants.country, restaurants.street, restaurants.city, restaurants.province, restaurants.post_code
-    FROM users
-    JOIN users_restaurants ON users_restaurants.user_id = users.id
-    JOIN restaurants ON users_restaurants.restaurant_id = restaurants.id
-    WHERE users.id = $1
+      SELECT restaurants.id, 
+            restaurants.name, 
+            restaurants.rating, 
+            restaurants.country, 
+            restaurants.street, 
+            restaurants.city, 
+            restaurants.province, 
+            restaurants.post_code,
+            users_restaurants.is_done
+      FROM users
+      JOIN users_restaurants ON users_restaurants.user_id = users.id
+      JOIN restaurants ON users_restaurants.restaurant_id = restaurants.id
+      WHERE users.id = $1
     `;
     const values = [userId];
     return db.query(queryString, values)
@@ -49,10 +61,15 @@ module.exports = (db) => {
   //queries db for all books of given user
   const selectUserBooks = (userId) => {
     const queryString = `
-	  SELECT books.id, books.title, books.author, books.rating, books.synopsis
+	    SELECT books.id, 
+             books.title, 
+             books.author, 
+             books.rating, 
+             books.synopsis,
+             users_books.is_done
       FROM users
       JOIN users_books ON users_books.user_id = users.id
-	  JOIN books ON users_books.book_id = books.id
+	    JOIN books ON users_books.book_id = books.id
       WHERE users.id = $1
     `;
     const values = [userId];
@@ -67,11 +84,15 @@ module.exports = (db) => {
   //queries db for all products of given user
   const selectUserProducts = (userId) => {
     const queryString = `
-    SELECT products.id, products.name, products.rating, products.price
-    FROM users
-    JOIN users_products ON users_products.user_id = users.id
-  JOIN products ON users_products.product_id = products.id
-    WHERE users.id = $1
+      SELECT products.id, 
+             products.name, 
+             products.rating, 
+             products.price,
+             users_products.is_done
+      FROM users
+      JOIN users_products ON users_products.user_id = users.id
+      JOIN products ON users_products.product_id = products.id
+      WHERE users.id = $1
     `;
     const values = [userId];
     return db.query(queryString, values)
@@ -90,7 +111,6 @@ module.exports = (db) => {
     //sends all query results to the browser at the same time
     Promise.all([selectUserMovies(userId), selectUserRestaurants(userId), selectUserBooks(userId), selectUserProducts(userId)])
       .then(result => {
-
         //result is an array of arrays that gets sent to AJAX call
         res.send(result);
       })

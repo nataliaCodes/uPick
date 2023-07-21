@@ -2,7 +2,7 @@ const categories = ['.movies', '.restaurants', '.books', '.products'];
 
 //for now only applies class, need to put in state+db
 const createDoneButton = function (itemId) {
-  return $('<button type="input" class="done-button">')
+  return $('<button type="input" class="btn done-button">')
     .text('Done')
     .click(() => {
       console.log('Done clicked on ', itemId);
@@ -11,14 +11,15 @@ const createDoneButton = function (itemId) {
 }
 
 //edit button opens up modal
-const createEditButton = function (modalHTMLId, itemName, itemId, itemInfo) {
-  return $(`<button type="button" class="edit-button" data-toggle="modal" data-target="${modalHTMLId}">`)
+const createEditButton = function (modalHTMLId, itemId, categ, itemName, itemInfo) {
+  return $(`<button type="button" class="btn edit-button" data-toggle="modal" data-target="${modalHTMLId}">`)
     .text('Edit')
     .click(() => {
       //remove $ from price when displaying in modal
       let itemInfoVal = modalHTMLId == '#productsModal' ? itemInfo.slice(1) : itemInfo;
       //push values to specific modal
       $(`${modalHTMLId} .item-id`).val(itemId);
+      $(`${modalHTMLId} .category`).val(categ);
       $(`${modalHTMLId} .item-name`).val(itemName);
       $(`${modalHTMLId} .item-info`).val(itemInfoVal);
     });
@@ -52,17 +53,20 @@ const createCategoryDisplay = function (queryResult, category) {
 
   //build each item inside category
   for (const obj of queryResult) {
+    console.log('obj :', obj);
     const item = $(`<article id="${categTitle.slice(0, -1)}-${itemId}">`);
     const myId = `#${categTitle.slice(0, -1)}` + `${itemId}`;
     //needed to communicate to back-end
     const id = obj.id;
     //create elements of category item
+    const leftHeader = $('<div class="header-left"></div>');
     const header = $('<header>');
     const title = $('<h3>').text(`${obj.title || obj.name}`);
+    const doneTag = $('<span class="badge done">Done!</span>')
     const buttonsContainer = $('<div class="buttons">');
     const rating = $('<h5>').text(`Rating: ${obj.rating}`);
     let info;
-    if (obj.synopsis) {
+    if(obj.synopsis) {
       info = $('<p>').text(`${obj.synopsis}`);
     } else if (obj.city) {
       info = $('<p>').text(`${obj.street}, ${obj.city}, ${obj.province}, ${obj.post_code}, ${obj.country}`);
@@ -70,13 +74,17 @@ const createCategoryDisplay = function (queryResult, category) {
       info = $('<p>').text(`$${parseFloat(obj.price / 100).toFixed(2)}`);
     } else {
       info = $('<p>').text('No additional information provided');
-    }
+    };
+    const isDone = obj.is_done;
     const doneButton = createDoneButton(myId);
-    const editButton = createEditButton(`#${categTitle}Modal`, obj.title || obj.name, id, info.text());
+    if(isDone) doneButton.prop('disabled', true);
+    const editButton = createEditButton(`#${categTitle}Modal`, id, categTitle, obj.title || obj.name, info.text());
     const divider = createDivider(itemId, itemsCount);
 
     //put all HTML elements together
-    header.append(title);
+    leftHeader.append(title);
+    if(isDone) leftHeader.append(doneTag);
+    header.append(leftHeader);
     buttonsContainer.append(doneButton);
     buttonsContainer.append(editButton);
     header.append(buttonsContainer);
@@ -84,8 +92,9 @@ const createCategoryDisplay = function (queryResult, category) {
     item.append(rating);
     item.append(info)
     item.append(divider);
+    if(isDone) item.addClass('done');
     categoryContainer.append(item);
-    if (queryResult.indexOf(obj) == queryResult.length-1) categoryContainer.append('<div class="section-divider bottom"></div>');
+    if(queryResult.indexOf(obj) == queryResult.length-1) categoryContainer.append('<div class="section-divider bottom"></div>');
     itemId++;
   }
   return categoryContainer;
